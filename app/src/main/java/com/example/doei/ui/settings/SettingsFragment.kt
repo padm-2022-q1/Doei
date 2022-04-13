@@ -5,14 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.doei.databinding.FragmentDashboardBinding
+import com.example.doei.MainActivity
+import com.example.doei.R
+import com.example.doei.databinding.ActivityMainBinding
+import com.example.doei.databinding.FragmentSettingsBinding
+import com.google.android.material.switchmaterial.SwitchMaterial
 
 class SettingsFragment : Fragment() {
 
-    private var _binding: FragmentDashboardBinding? = null
+    private var _binding: FragmentSettingsBinding? = null
+    lateinit var themeSwitch: SwitchMaterial
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -23,14 +30,25 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val dashboardViewModel =
+        val settingsViewModel =
             ViewModelProvider(this).get(SettingsViewModel::class.java)
 
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textDashboard
-        dashboardViewModel.text.observe(viewLifecycleOwner) {
+        themeSwitch = binding.switchDarkMode
+        themeSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
+            if (isChecked){
+                themeSwitch.setText("Dark Mode")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+
+            } else {
+                themeSwitch.setText("Light Mode")
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            }
+        }
+        val textView: TextView = binding.textSettings
+        settingsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
         }
         return root
@@ -41,4 +59,6 @@ class SettingsFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
+
 }
