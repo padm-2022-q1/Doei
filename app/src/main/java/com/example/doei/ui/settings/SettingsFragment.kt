@@ -43,8 +43,8 @@ class SettingsFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
             } else {
-                themeSwitch.setText("Light Mode")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                themeSwitch.setText("Light Mode")
             }
         }
         val textView: TextView = binding.textSettings
