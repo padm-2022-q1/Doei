@@ -53,6 +53,8 @@ class MainActivity : AppCompatActivity() {
                 navView.visibility = View.VISIBLE
             }
         }
+
+
     }
 
 }
