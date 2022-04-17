@@ -24,10 +24,10 @@
         tools:layout="@layout/fragment_search" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.doei.ui.notifications.NotificationsFragment"
+        android:id="@+id/navigation_myInterests"
+        android:name="com.example.doei.ui.myInterests.NotificationsFragment"
         android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        tools:layout="@layout/fragment_my_interests" />
 
     <fragment
         android:id="@+id/navigation_settings"

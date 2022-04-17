@@ -15,9 +15,9 @@
         />
 
     <item
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_myInterests"
         android:icon="@drawable/ic_baseline_notifications_none_24"
-        android:title="@string/title_notifications"
+        android:title="@string/Interests"
         />
 
     <item
