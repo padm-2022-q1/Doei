@@ -17,6 +17,4 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="label_light_mode">Modo Claro</string>
-    <string name="filtro">Filtro</string>
-    <string name="Interests">Interesses</string>
 </resources>

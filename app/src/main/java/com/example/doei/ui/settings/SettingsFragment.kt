@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.doei.MainActivity
 import com.example.doei.R
 import com.example.doei.databinding.ActivityMainBinding
@@ -20,7 +23,7 @@ class SettingsFragment : Fragment() {
 
     private var _binding: FragmentSettingsBinding? = null
     lateinit var themeSwitch: SwitchMaterial
-
+    lateinit var buttonAccount: ImageButton
 
     // This property is only valid between onCreateView and
     // onDestroyView.
@@ -47,6 +50,11 @@ class SettingsFragment : Fragment() {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 themeSwitch.setText("Off")
             }
+        }
+
+        buttonAccount = binding.buttonAccount
+        buttonAccount.setOnClickListener {
+            findNavController().navigate(R.id.navigation_account)
         }
 //        val textView: TextView = binding.textSettings
 //        settingsViewModel.text.observe(viewLifecycleOwner) {

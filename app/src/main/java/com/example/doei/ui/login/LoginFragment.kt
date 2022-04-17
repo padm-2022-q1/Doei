@@ -5,14 +5,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.doei.R
-import com.example.doei.databinding.FragmentHomeBinding
 import com.example.doei.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
@@ -39,6 +35,7 @@ class LoginFragment : Fragment() {
         loginButton = binding.login
         loginButton.setOnClickListener {
             findNavController().navigate(R.id.navigation_home)
+
         }
 
         return root
