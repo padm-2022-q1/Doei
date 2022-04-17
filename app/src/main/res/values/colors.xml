@@ -13,4 +13,5 @@
     <color name="gray">#a0a0a0</color>
     <color name="dark_gray">#717f7f</color>
     <color name="light_gray">#f1f5f4</color>
+    <color name="next_button_color">#A8199587</color>
 </resources>

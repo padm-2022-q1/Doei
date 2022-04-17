@@ -40,18 +40,18 @@ class SettingsFragment : Fragment() {
         themeSwitch = binding.switchDarkMode
         themeSwitch.setOnCheckedChangeListener { compoundButton, isChecked ->
             if (isChecked){
-                themeSwitch.setText("Dark Mode")
+                themeSwitch.setText("On")
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
 
             } else {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                themeSwitch.setText("Light Mode")
+                themeSwitch.setText("Off")
             }
         }
-        val textView: TextView = binding.textSettings
-        settingsViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
+//        val textView: TextView = binding.textSettings
+//        settingsViewModel.text.observe(viewLifecycleOwner) {
+//            textView.text = it
+//        }
         return root
     }
 
