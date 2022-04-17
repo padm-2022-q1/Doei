@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="22dp">
+
+    <ImageButton
+        android:id="@+id/button_account_back_menu"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+
+        android:layout_marginStart="-30dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/custom_next_button"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintBottom_toTopOf="@+id/text_label_account_info"
+        app:layout_constraintStart_toStartOf="@+id/text_label_account_info"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <Button
+        android:id="@+id/button_account_save_info"
+        android:layout_width="95dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_next_button"
+        android:drawableStart="@drawable/ic_check"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        android:text="Salvar Alterações"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="@+id/button_account_back_menu"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.928"
+        app:layout_constraintStart_toEndOf="@+id/button_account_back_menu"
+        app:layout_constraintTop_toTopOf="@+id/button_account_back_menu" />
+
+    <TextView
+        android:id="@+id/text_label_account_info"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Account"
+        android:textSize="50sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.192"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/text_photo_config"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textSize="@dimen/textSize_label"
+        android:text="Foto"
+        app:layout_constraintEnd_toEndOf="@+id/text_label_account_info"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/text_label_account_info"
+        app:layout_constraintTop_toBottomOf="@+id/text_label_account_info" />
+
+    <ImageView
+        android:id="@+id/image_account_info"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="90dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_photo_config"
+        app:layout_constraintStart_toEndOf="@+id/text_photo_config"
+        app:layout_constraintTop_toTopOf="@+id/text_photo_config"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/custom_button" />
+
+    <TextView
+        android:id="@+id/text_upload_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Upload Image"
+        app:layout_constraintEnd_toEndOf="@+id/image_account_info"
+        app:layout_constraintStart_toStartOf="@+id/image_account_info"
+        app:layout_constraintTop_toBottomOf="@+id/image_account_info" />
+
+    <TextView
+        android:id="@+id/text_label_name_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/textSize_label"
+        android:layout_marginTop="100dp"
+        android:text="Nome"
+        app:layout_constraintEnd_toEndOf="@+id/text_photo_config"
+        app:layout_constraintStart_toStartOf="@+id/text_photo_config"
+        app:layout_constraintTop_toBottomOf="@+id/text_photo_config" />
+
+    <EditText
+        android:id="@+id/editText_name_info"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_input"
+        android:hint="@string/hint_nome_completo"
+        android:textSize="@dimen/inputText_size"
+        android:inputType="textPersonName"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/text_label_name_info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/text_upload_image"
+        app:layout_constraintTop_toTopOf="@+id/text_label_name_info"
+        app:layout_constraintVertical_bias="0.437" />
+
+    <TextView
+        android:id="@+id/text_label_gender_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        android:textSize="@dimen/textSize_label"
+        android:text="Sexo"
+        app:layout_constraintStart_toStartOf="@+id/text_label_name_info"
+        app:layout_constraintTop_toBottomOf="@+id/text_label_name_info" />
+
+    <ToggleButton
+        android:id="@+id/button_gender_male"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textOff=""
+        android:textOn=""
+        android:drawable="@drawable/ic_male_off"
+        android:background="@drawable/custom_next_button"
+        app:layout_constraintBottom_toBottomOf="@+id/text_label_gender_info"
+        app:layout_constraintStart_toStartOf="@+id/editText_name_info"
+        app:layout_constraintTop_toTopOf="@+id/text_label_gender_info" />
+
+    <ToggleButton
+        android:id="@+id/button_gender_female"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:textOff=""
+        android:textOn=""
+        android:layout_marginStart="24dp"
+        android:background="@drawable/custom_next_button"
+        android:drawable="@drawable/ic_female_off"
+        app:layout_constraintBottom_toBottomOf="@+id/button_gender_male"
+        app:layout_constraintStart_toEndOf="@+id/button_gender_male"
+        app:layout_constraintTop_toTopOf="@+id/button_gender_male"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_age_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="@dimen/textSize_label"
+        android:text="Idade"
+        app:layout_constraintStart_toStartOf="@+id/text_label_gender_info"
+        app:layout_constraintTop_toBottomOf="@+id/text_label_gender_info" />
+
+    <EditText
+        android:id="@+id/editText_age_info"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        android:background="@drawable/custom_input"
+        android:textSize="@dimen/inputText_size"
+        android:hint="@string/hint_editText_idade"
+        android:inputType="number"
+        app:layout_constraintBottom_toBottomOf="@+id/text_age_info"
+        app:layout_constraintStart_toStartOf="@+id/button_gender_male"
+        app:layout_constraintTop_toTopOf="@+id/text_age_info" />
+
+    <TextView
+        android:id="@+id/text_email_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:textSize="@dimen/textSize_label"
+        android:text="Email"
+        app:layout_constraintStart_toStartOf="@+id/text_age_info"
+        app:layout_constraintTop_toBottomOf="@+id/text_age_info" />
+
+    <EditText
+        android:id="@+id/editText_email_info"
+        android:layout_width="200dp"
+        android:layout_height="35dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        android:textSize="@dimen/inputText_size"
+        android:background="@drawable/custom_input"
+
+        android:hint="@string/hint_editText_email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@+id/text_email_info"
+        app:layout_constraintStart_toStartOf="@+id/editText_age_info"
+        app:layout_constraintTop_toTopOf="@+id/text_email_info" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

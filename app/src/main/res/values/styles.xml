@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+    <style name="AppTheme.ButtonStyle" parent="Base.Widget.AppCompat.Button">
         <!--especifica um botão sem bordas-->
-        <item name="textAllCaps">false</item>
-        <item name="android:fontFamily">@font/</item>
+
         <item name="android:radius">22dp</item>
         <item name="android:backgroundTint">@color/water_green</item>
         <item name="android:textColor">#FFFFFF</item>
 
     </style>
 
+    <style name="AppTheme.ToggleButton" parent="Base.Widget.AppCompat.Button">
+        <!--especifica um botão sem bordas-->
+
+        <item name="android:radius">22dp</item>
+        <item name="android:backgroundTint">@color/water_green</item>
+        <item name="android:textColor">#FFFFFF</item>
+
+    </style>
+
+    <style name="AppTheme.DarkTextInput" parent="Widget.AppCompat.EditText">
+        <!--especifica um botão sem bordas-->
+        <item name="android:editTextColor">@color/dark_gray</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/dark_gray</item>
+
+    </style>
 
 
 </resources>

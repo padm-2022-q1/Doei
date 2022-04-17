@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/water_green</item>
         <!-- Customize your theme here. -->
         <item name="backgroundColor">@color/gray</item>
+        <item name="textInputStyle">@style/AppTheme.DarkTextInput</item>
         <item name="android:textColor">#ffffff</item>
     </style>
 </resources>
