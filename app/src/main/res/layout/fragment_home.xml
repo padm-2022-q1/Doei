@@ -6,18 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".ui.home.HomeFragment">
 
-    <TextView
-        android:id="@+id/text_home"
+    <androidx.appcompat.widget.SearchView
+        android:id="@+id/svSearchProduct"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:queryHint="Teste"
+        app:defaultQueryHint="Teste"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/gray"
+        />
+
+    <Button
+        android:id="@+id/btFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/svSearchProduct"
+        app:layout_constraintEnd_toEndOf="@id/svSearchProduct"
+        android:backgroundTint="@color/light_gray"
+        android:text="@string/filtro"
+        android:textColor="@color/dark_gray"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/btFilter"
+        android:layout_marginHorizontal="20dp"
+        tools:listitem="@layout/product_adapter"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        tools:itemCount="7"
+        tools:orientation="vertical"
+        tools:scrollbars="vertical"
+        tools:spanCount="2"
+        />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
