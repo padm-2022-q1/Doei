@@ -30,8 +30,15 @@
         tools:layout="@layout/fragment_my_interests" />
 
     <fragment
+        android:id="@+id/navigation_conversations"
+        android:name="com.example.doei.ui.chat.allConverstion.AllConversationsFragment"
+        android:label="@string/title_conversations"
+        tools:layout="@layout/all_conversations_fragment" />
+
+    <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.doei.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
 </navigation>

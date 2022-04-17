@@ -10,8 +10,13 @@
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1365" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/adapter_conversation.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/all_conversations_fragment.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_conversations.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_search.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/fragment_settings.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/product_adapter.xml" value="0.2578125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2578125" />
