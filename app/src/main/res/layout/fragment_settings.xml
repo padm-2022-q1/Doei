@@ -9,8 +9,8 @@
     <androidx.constraintlayout.widget.ConstraintLayout
 
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:layout_height="match_parent"
+        android:padding="0dp"
         tools:context=".ui.settings.SettingsFragment">
 
         <TextView
@@ -23,7 +23,7 @@
             android:textSize="50sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.165"
+            app:layout_constraintHorizontal_bias="0.094"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,8 +45,8 @@
             android:id="@+id/account_image"
             android:layout_width="45dp"
             android:layout_height="45dp"
-            android:src="@drawable/ic_profile"
             android:background="@drawable/custom_button"
+            android:src="@drawable/ic_profile"
             app:layout_constraintEnd_toEndOf="@+id/label_account"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/label_account"
@@ -56,7 +56,7 @@
             android:id="@+id/text_account_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Rafael Totino"
+            android:text="Nome Completo"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/account_image"
             app:layout_constraintStart_toEndOf="@+id/label_account"
@@ -79,11 +79,13 @@
             android:id="@+id/button_account"
             android:layout_width="38dp"
             android:layout_height="39dp"
-            android:layout_marginStart="96dp"
+            android:layout_marginStart="100dp"
             android:background="@drawable/custom_next_button"
             android:backgroundTint="@color/next_button_color"
             android:src="@drawable/ic_next_button"
             app:layout_constraintBottom_toBottomOf="@+id/text_account_personal_info"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toEndOf="@+id/text_account_name"
             app:layout_constraintTop_toTopOf="@+id/text_account_name"
             app:layout_constraintVertical_bias="1.0" />
@@ -92,7 +94,7 @@
             android:id="@+id/label_settings"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="116dp"
+            android:layout_marginTop="90dp"
             android:paddingBottom="15dp"
             android:text="@string/title_settings"
             android:textSize="25sp"
@@ -132,9 +134,9 @@
             android:backgroundTint="@color/next_button_color"
             android:src="@drawable/ic_next_button"
             app:layout_constraintBottom_toBottomOf="@+id/text_language_config"
-            app:layout_constraintEnd_toEndOf="@+id/button_account"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toEndOf="@+id/text_language_config"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/button_account"
             app:layout_constraintTop_toTopOf="@+id/text_language_config"
             app:layout_constraintVertical_bias="0.4" />
 

@@ -20,4 +20,6 @@
     <string name="hint_nome_completo">Nome completo</string>
     <string name="hint_editText_idade">Digite sua idade</string>
     <string name="hint_editText_email">Digite seu e-mail</string>
+    <string name="text_on_click">UPLOAD YOUR IMAGE</string>
+
 </resources>

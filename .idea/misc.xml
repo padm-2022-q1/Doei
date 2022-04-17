@@ -27,6 +27,7 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_dark_mode.xml" value="0.24" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_dashboard_black_24dp.xml" value="0.2985" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_female.xml" value="0.2405" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_female_off.xml" value="0.2355" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_heart.xml" value="0.192" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_home.xml" value="0.192" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/drawable/ic_home_black_24dp.xml" value="0.2985" />
@@ -41,10 +42,11 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/activity_splash_screen.xml" value="0.33" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/content_main.xml" value="0.2318840579710145" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/custom_toggle_button.xml" value="0.34479166666666666" />
-        <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_account.xml" value="0.33" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_dashboard.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_home.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_my_interests.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_notifications.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_search.xml" value="0.22735507246376813" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/layout/fragment_settings.xml" value="0.33" />

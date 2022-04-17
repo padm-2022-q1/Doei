@@ -10,10 +10,10 @@
         android:id="@+id/button_account_back_menu"
         android:layout_width="35dp"
         android:layout_height="35dp"
-
         android:layout_marginStart="-30dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/custom_next_button"
+        android:backgroundTint="@color/light_gray"
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintBottom_toTopOf="@+id/text_label_account_info"
         app:layout_constraintStart_toStartOf="@+id/text_label_account_info"
@@ -30,6 +30,7 @@
         android:paddingEnd="2dp"
         android:text="Salvar Alterações"
         android:textSize="11sp"
+
         app:layout_constraintBottom_toBottomOf="@+id/button_account_back_menu"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.928"
@@ -41,7 +42,7 @@
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="70dp"
         android:text="Account"
         android:textSize="50sp"
         android:textStyle="bold"
@@ -64,9 +65,11 @@
 
     <ImageView
         android:id="@+id/image_account_info"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="90dp"
+        android:background="@drawable/custom_next_button"
+        android:src="@drawable/ic_profile"
         app:layout_constraintBottom_toBottomOf="@+id/text_photo_config"
         app:layout_constraintStart_toEndOf="@+id/text_photo_config"
         app:layout_constraintTop_toTopOf="@+id/text_photo_config"
@@ -121,27 +124,25 @@
         app:layout_constraintStart_toStartOf="@+id/text_label_name_info"
         app:layout_constraintTop_toBottomOf="@+id/text_label_name_info" />
 
-    <ToggleButton
+    <ImageButton
         android:id="@+id/button_gender_male"
+        android:src="@drawable/ic_male_off"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:textOff=""
-        android:textOn=""
-        android:drawable="@drawable/ic_male_off"
         android:background="@drawable/custom_next_button"
+        android:backgroundTint="@color/light_gray"
         app:layout_constraintBottom_toBottomOf="@+id/text_label_gender_info"
         app:layout_constraintStart_toStartOf="@+id/editText_name_info"
         app:layout_constraintTop_toTopOf="@+id/text_label_gender_info" />
 
-    <ToggleButton
+    <ImageButton
         android:id="@+id/button_gender_female"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:textOff=""
-        android:textOn=""
         android:layout_marginStart="24dp"
         android:background="@drawable/custom_next_button"
-        android:drawable="@drawable/ic_female_off"
+        android:src="@drawable/ic_female_off"
+        android:backgroundTint="@color/light_gray"
         app:layout_constraintBottom_toBottomOf="@+id/button_gender_male"
         app:layout_constraintStart_toEndOf="@+id/button_gender_male"
         app:layout_constraintTop_toTopOf="@+id/button_gender_male"

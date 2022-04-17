@@ -1,15 +1,14 @@
 package com.example.doei.ui.account
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.TextView
-import android.widget.ToggleButton
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.ViewModelProvider
@@ -26,7 +25,10 @@ class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
     private lateinit var backMenuButton: ImageButton
     private lateinit var googleSignInClient: GoogleSignInClient
-    lateinit var toggle: ToggleButton
+    lateinit var maleButton: ImageButton
+    lateinit var femaleButton: ImageButton
+    lateinit var upload: TextView
+    lateinit var main: MainActivity
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -48,22 +50,33 @@ class AccountFragment : Fragment() {
         }
 
 
-        toggle = binding.buttonGenderMale
+        maleButton = binding.buttonGenderMale
+
+//        maleButton.setOnClickListener {
+//            maleButton.setBackgroundColor(Color.GREEN)
+//        }
 //        toggle.setButtonDrawable(drawable.ic_male)
 //        toggle.setButtonDrawable(drawable.ic_female)
-        toggle.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                toggle.setButtonDrawable(drawable.ic_male)
-                toggle.setBackgroundColor(resources.getColor(R.color.water_green))
+//        toggle.setOnCheckedChangeListener { _, isChecked ->
+//            if (isChecked) {
+//
+//                toggle.setButtonDrawable(drawable.ic_male)
+//                toggle.setPadding(3,3,3,3)
+//                toggle.setBackgroundColor(resources.getColor(R.color.water_green))
+//
+//            } else {
+//                toggle.setButtonDrawable(drawable.ic_male_off)
+//                toggle.setBackgroundColor(resources.getColor(R.color.light_gray))
+//            }
+//        }
 
-            } else {
-                toggle.setButtonDrawable(drawable.ic_male_off)
-                toggle.setBackgroundColor(resources.getColor(R.color.light_gray))
-            }
-        }
+//        upload = binding.textUploadImage
+//        upload.setOnClickListener { Toast.makeText(main,
+//            R.string.text_on_click, Toast.LENGTH_LONG).show() }
 
         return root
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
