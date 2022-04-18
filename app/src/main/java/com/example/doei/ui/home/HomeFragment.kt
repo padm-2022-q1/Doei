@@ -6,10 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doei.R
 import com.example.doei.databinding.FragmentHomeBinding
+import com.example.doei.models.Product
+import com.example.doei.ui.product_details.ProductDetailsFragment
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), ProductAdapter.Listener {
 
+    private lateinit var viewModel: HomeViewModel
     private var _binding: FragmentHomeBinding? = null
 
     // This property is only valid between onCreateView and
@@ -21,15 +27,28 @@ class HomeFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        ViewModelProvider(this)[HomeViewModel::class.java]
+        viewModel = ViewModelProvider(this)[HomeViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+        initObservers()
+
         return binding.root
+    }
+
+    private fun initObservers() {
+        viewModel.productList.observeForever {
+            _binding?.rvProducts?.layoutManager = LinearLayoutManager(requireContext())
+            _binding?.rvProducts?.adapter = ProductAdapter(it, requireActivity(), this)
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onProductClick(product: Product) {
+        findNavController().navigate(R.id.action_navigation_home_to_product_details)
     }
 }

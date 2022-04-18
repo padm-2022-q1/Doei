@@ -11,7 +11,6 @@ import com.example.doei.databinding.ProductDetailsFragmentBinding
 import com.example.doei.ui.login.LoginViewModel
 
 class ProductDetailsFragment : Fragment() {
-
     private var _binding: ProductDetailsFragmentBinding? = null
 
     private val binding get() = _binding!!

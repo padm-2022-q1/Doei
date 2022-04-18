@@ -38,6 +38,10 @@ class LoginFragment : Fragment() {
 
         }
 
+        binding.btSignin.setOnClickListener {
+            findNavController().navigate(R.id.navigation_account)
+        }
+
         return root
     }
 

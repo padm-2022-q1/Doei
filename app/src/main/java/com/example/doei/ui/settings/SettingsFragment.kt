@@ -56,6 +56,10 @@ class SettingsFragment : Fragment() {
         buttonAccount.setOnClickListener {
             findNavController().navigate(R.id.navigation_account)
         }
+
+        _binding?.btAddProduct?.setOnClickListener {
+            findNavController().navigate(R.id.action_navigation_settings_to_product_register)
+        }
 //        val textView: TextView = binding.textSettings
 //        settingsViewModel.text.observe(viewLifecycleOwner) {
 //            textView.text = it
