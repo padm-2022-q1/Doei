@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/navigation_home"
@@ -18,6 +17,12 @@
         android:id="@+id/navigation_myInterests"
         android:icon="@drawable/ic_baseline_notifications_none_24"
         android:title="Interests"
+        />
+
+    <item
+        android:id="@+id/navigation_conversations"
+        android:icon="@drawable/ic_chat"
+        android:title="@string/title_conversations"
         />
 
     <item
