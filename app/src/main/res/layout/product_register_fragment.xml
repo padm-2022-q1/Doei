@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.product_register.ProductRegisterFragment"
+    android:layout_margin="8dp">
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="wrap_content"
+
+        android:layout_height="620dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView_generalI_info_area_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginTop="16dp"
+                android:text="Informações Gerais:"
+                android:textColor="@color/water_green"
+                android:textSize="20sp"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/editText_state"
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+
+                android:hint="@string/editText_state_hint"
+                android:inputType="text"
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_generalI_info_area_title"/>
+
+            <EditText
+                android:id="@+id/editText_city"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+
+                android:hint="@string/inputText_hint_city"
+
+                android:inputType="text"
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editText_state" />
+
+            <EditText
+                android:id="@+id/editText_address"
+                android:layout_width="350dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+
+                android:hint="@string/inputText_hint_address"
+                android:inputType="text"
+
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_city" />
+
+            <EditText
+                android:id="@+id/editText_building_number"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+
+                android:hint="@string/inputText_hint_building_number"
+                android:inputType="number"
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_address" />
+
+            <EditText
+                android:id="@+id/editText_complement"
+                android:layout_width="238dp"
+                android:layout_height="50dp"
+
+                android:layout_marginStart="12dp"
+
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+                android:hint="@string/inputText_hint_complement"
+                android:inputType="text"
+
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toEndOf="@+id/editText_building_number"
+                app:layout_constraintTop_toBottomOf="@+id/editText_address" />
+
+            <TextView
+                android:id="@+id/textView_donation_area_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+
+                android:layout_marginTop="48dp"
+                android:text="@string/textView_donation_area_title_text"
+                android:textColor="@color/water_green"
+                android:textSize="20sp"
+
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_building_number" />
+
+            <EditText
+                android:id="@+id/editText_product_title"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:inputType="text"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_input"
+
+                android:backgroundTint="@color/light_gray"
+                android:hint="@string/editText_product_title_hint_text"
+
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_donation_area_title"></EditText>
+
+            <EditText
+                android:id="@+id/editText_product_category"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:inputType="text"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_input"
+
+                android:backgroundTint="@color/light_gray"
+                android:hint="@string/editText_product_category_hint_text"
+
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_product_title"></EditText>
+
+            <EditText
+                android:id="@+id/editText_product_details"
+                android:layout_width="350dp"
+                android:layout_height="160dp"
+                android:inputType="text"
+
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/custom_input"
+
+                android:backgroundTint="@color/light_gray"
+                android:hint="@string/editText_product_details_hint_text"
+
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editText_product_category"></EditText>
+
+            <ImageView
+                android:id="@+id/imageView_donation_pic"
+                android:layout_width="300dp"
+                android:layout_height="400dp"
+
+                android:backgroundTint="@color/gray"
+                android:background="@drawable/custom_input"
+
+                android:layout_marginTop="20dp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editText_product_details">
+            </ImageView>
+
+            <Button
+                android:id="@+id/button_choose_photo"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+
+                android:layout_marginTop="8dp"
+
+                android:text="@string/button_choose_photo_text"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/water_green"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageView_donation_pic" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/button_announce_product"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+
+        android:backgroundTint="@color/gray"
+        android:enabled="false"
+        android:text="@string/button_announce_product_text"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintStart_toStartOf="parent"
+
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2"
+
+        app:layout_constraintVertical_bias="0.257" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

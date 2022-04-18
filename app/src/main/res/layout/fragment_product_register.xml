@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.product_register.ProductRegisterFragment"
+    android:layout_margin="8dp">
+
+    <Spinner
+        android:id="@+id/dropdown_states"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:spinnerMode="dropdown"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+
+
+        ></Spinner>
+
+    <EditText
+        android:id="@+id/editText_city"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:background="@drawable/custom_input"
+
+        android:hint="@string/inputText_hint_city"
+        android:inputType="text"
+
+        android:paddingStart="@dimen/padding_editText_product_register"
+        android:paddingEnd="@dimen/padding_editText_product_register"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dropdown_states"
+        android:layout_marginTop="16dp"
+        />
+
+    <EditText
+        android:id="@+id/editText_address"
+        android:layout_width="350dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+
+        android:background="@drawable/custom_input"
+        android:hint="@string/inputText_hint_address"
+        android:inputType="text"
+
+        android:paddingStart="@dimen/padding_editText_product_register"
+        android:paddingEnd="@dimen/padding_editText_product_register"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_city"
+        />
+
+    <EditText
+        android:id="@+id/editText_building_number"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_input"
+
+        android:hint="@string/inputText_hint_building_number"
+        android:inputType="number"
+        android:paddingStart="@dimen/padding_editText_product_register"
+        android:paddingEnd="@dimen/padding_editText_product_register"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_address"
+        />
+
+    <EditText
+        android:id="@+id/editText_complement"
+        android:layout_width="238dp"
+        android:layout_height="50dp"
+
+        android:layout_marginStart="12dp"
+
+        android:layout_marginTop="16dp"
+        android:background="@drawable/custom_input"
+        android:hint="@string/inputText_hint_complement"
+        android:inputType="text"
+        android:paddingStart="@dimen/padding_editText_product_register"
+        android:paddingEnd="@dimen/padding_editText_product_register"
+        app:layout_constraintStart_toEndOf="@+id/editText_building_number"
+        app:layout_constraintTop_toBottomOf="@+id/editText_address" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+
+        android:text="Sobre a doação:"
+        android:textStyle="bold"
+        android:textColor="@color/water_green"
+        android:textSize="20sp"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_building_number" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

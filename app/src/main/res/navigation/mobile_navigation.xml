@@ -40,4 +40,18 @@
         android:name="com.example.doei.ui.account.AccountFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_account" />
+
+    <fragment
+        android:id="@+id/product_details"
+        android:name="com.example.doei.ui.product_details.ProductDetailsFragment"
+        android:label="@string/title_product_details"
+        tools:layout="@layout/product_details_fragment"
+        ></fragment>
+
+    <fragment
+        android:id="@+id/product_register"
+        android:name="com.example.doei.ui.product_register.ProductRegisterFragment"
+        android:label="@string/product_register_title"
+        tools:layout="@layout/product_register_fragment"
+        ></fragment>
 </navigation>

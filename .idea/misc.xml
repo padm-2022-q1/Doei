@@ -54,6 +54,10 @@
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.234" />
         <entry key="..\:/Users/Rafael/AndroidStudioProjects/Doei/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.234" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/fragment_product_register.xml" value="0.234375" />
+        <entry key="app/src/main/res/layout/product_details_fragment.xml" value="0.234375" />
+        <entry key="app/src/main/res/layout/product_register_fragment.xml" value="0.234375" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.21203703703703702" />
       </map>
     </option>
   </component>
