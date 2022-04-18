@@ -33,12 +33,23 @@
         android:id="@+id/navigation_conversations"
         android:name="com.example.doei.ui.chat.allConverstion.AllConversationsFragment"
         android:label="@string/title_conversations"
-        tools:layout="@layout/all_conversations_fragment" />
+        tools:layout="@layout/all_conversations_fragment">
+        <action
+            android:id="@+id/action_navigation_conversations_to_chatFragment"
+            app:destination="@id/navigation_chatFragment" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.doei.ui.settings.SettingsFragment"
         android:label="@string/title_settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/navigation_chatFragment"
+        android:name="com.example.doei.ui.chat.conversation.ChatFragment"
+        android:label="@string/title_chat"
+        tools:layout="@layout/chat_fragment" />
 
 </navigation>

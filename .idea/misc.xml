@@ -11,7 +11,9 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/adapter_conversation.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/adapter_message.xml" value="1.1178571428571429" />
         <entry key="app/src/main/res/layout/all_conversations_fragment.xml" value="0.2578125" />
+        <entry key="app/src/main/res/layout/chat_fragment.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_conversations.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2578125" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.2578125" />

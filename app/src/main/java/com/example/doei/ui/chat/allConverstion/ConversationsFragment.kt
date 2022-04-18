@@ -6,10 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.doei.R
+import com.example.doei.databinding.AllConversationsFragmentBinding
 import com.example.doei.databinding.FragmentConversationsBinding
 
-class ConversationsFragment: Fragment() {
+class ConversationsFragment: Fragment(), ConversationAdapter.Listener {
 
     private lateinit var binding: FragmentConversationsBinding
     private lateinit var viewModel: ConversationsViewModel
@@ -32,8 +35,11 @@ class ConversationsFragment: Fragment() {
     private fun initObservers() {
         viewModel.conversationsList.observeForever { conversations ->
             binding.rvConversations.layoutManager =  LinearLayoutManager(requireContext())
-            binding.rvConversations.adapter = ConversationAdapter(requireActivity(), conversations)
-
+            binding.rvConversations.adapter = ConversationAdapter(requireActivity(), conversations, this)
         }
+    }
+
+    override fun onChatClicked() {
+        findNavController().navigate(R.id.action_navigation_conversations_to_chatFragment)
     }
 }

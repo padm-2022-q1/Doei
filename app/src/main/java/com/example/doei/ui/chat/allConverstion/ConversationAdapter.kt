@@ -14,7 +14,8 @@ import com.example.doei.models.Conversation
 
 class ConversationAdapter(
     private val activity: Activity,
-    private val conversationsList: List<Conversation>
+    private val conversationsList: List<Conversation>,
+    private val listener: Listener
     ): RecyclerView.Adapter<ConversationAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -39,6 +40,9 @@ class ConversationAdapter(
             .with(activity.applicationContext)
             .load(R.drawable.sofa_antigo)
             .into(holder.sivProfile)
+        holder.itemView.setOnClickListener {
+            listener.onChatClicked()
+        }
     }
 
     override fun getItemCount(): Int {
@@ -50,5 +54,9 @@ class ConversationAdapter(
         val tvLastMessage = view.tvLastMessage
         val sivProfile = view.sivProfile
         val ivAlert = view.ivAlert
+    }
+
+    interface Listener {
+        fun onChatClicked()
     }
 }
