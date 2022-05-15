@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "69899118916",
+    "project_id": "doei-87682",
+    "storage_bucket": "doei-87682.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:69899118916:android:98af4ac1047b1e5eac4f11",
+        "android_client_info": {
+          "package_name": "com.example.doei"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "69899118916-itm169i0l5c45l0b8n1dricd5b4pa72h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpjv7zHMj5L_BBzgBOJ32D3B3gQxVTUOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "69899118916-itm169i0l5c45l0b8n1dricd5b4pa72h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
