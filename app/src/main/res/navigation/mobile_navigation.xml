@@ -9,7 +9,14 @@
         android:id="@+id/navigation_login"
         android:name="com.example.doei.ui.login.LoginFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_navigation_login_to_navigation_home"
+            app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_navigation_login_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
@@ -81,5 +88,14 @@
         android:name="com.example.doei.ui.chat.conversation.ChatFragment"
         android:label="@string/title_chat"
         tools:layout="@layout/chat_fragment" />
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.example.doei.ui.signIn.SignInFragment"
+        android:label="sign_in_fragment"
+        tools:layout="@layout/sign_in_fragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>

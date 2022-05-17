@@ -19,9 +19,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var googleSignInClient: GoogleSignInClient
-//    lateinit var switchTheme: SwitchMaterial
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
