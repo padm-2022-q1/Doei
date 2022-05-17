@@ -1,4 +1,4 @@
-package com.example.doei.models
+package com.example.doei.domain.models
 
 data class ChatMessage(
     val idUsuario: Int,

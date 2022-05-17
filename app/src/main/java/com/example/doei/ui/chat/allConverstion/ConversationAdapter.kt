@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.doei.R
 import com.example.doei.databinding.AdapterConversationBinding
-import com.example.doei.models.Conversation
+import com.example.doei.domain.models.Conversation
 
 class ConversationAdapter(
     private val activity: Activity,

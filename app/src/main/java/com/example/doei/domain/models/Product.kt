@@ -1,4 +1,4 @@
-package com.example.doei.models
+package com.example.doei.domain.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

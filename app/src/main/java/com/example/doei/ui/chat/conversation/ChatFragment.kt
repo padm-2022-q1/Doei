@@ -1,7 +1,5 @@
 package com.example.doei.ui.chat.conversation
 
-import android.graphics.Color
-import android.os.Binder
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.doei.R
 import com.example.doei.databinding.ChatFragmentBinding
-import com.example.doei.models.Conversation
+import com.example.doei.domain.models.Conversation
 
 const val CONVERSATION_INFO = "CONVERSATION_INFO"
 class ChatFragment : Fragment() {

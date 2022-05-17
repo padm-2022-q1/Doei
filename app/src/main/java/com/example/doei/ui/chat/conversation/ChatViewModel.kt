@@ -3,7 +3,7 @@ package com.example.doei.ui.chat.conversation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.doei.models.ChatMessage
+import com.example.doei.domain.models.ChatMessage
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ChatViewModel : ViewModel() {

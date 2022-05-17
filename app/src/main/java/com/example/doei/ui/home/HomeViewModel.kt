@@ -1,10 +1,9 @@
 package com.example.doei.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.example.doei.models.Product
+import com.example.doei.domain.models.Product
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class HomeViewModel : ViewModel() {

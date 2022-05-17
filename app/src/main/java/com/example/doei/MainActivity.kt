@@ -14,7 +14,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.doei.databinding.ActivityMainBinding
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.switchmaterial.SwitchMaterial
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -41,7 +43,6 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             if(destination.id == R.id.navigation_login || destination.id == R.id.navigation_account) {
-
                 navView.visibility = View.GONE
             } else {
 

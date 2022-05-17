@@ -6,14 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.NavController
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.doei.databinding.SignInFragmentBinding
-import com.example.doei.utils.FirebaseUtils.firebaseAuth
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SignInFragment : Fragment() {
 
-    private lateinit var viewModel: SignInViewModel
+    private val viewModel: SignInViewModel by viewModels()
     private lateinit var binding: SignInFragmentBinding
 
     override fun onCreateView(
@@ -22,7 +23,26 @@ class SignInFragment : Fragment() {
     ): View {
         binding = SignInFragmentBinding.inflate(inflater, container, false)
         setClickListeners()
+        initObservers()
         return binding.root
+    }
+
+    private fun initObservers() {
+        activity?.let {
+            viewModel.handleCurrentUser().observe(it) { user ->
+                if (user != null) {
+                    SignInFragmentDirections.actionSignInFragmentToNavigationHome().run {
+                        findNavController().navigate(actionId)
+                    }
+                }
+            }
+
+            viewModel.handleAuthError().observe(it) { message ->
+                if (!message.isNullOrBlank()) {
+                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun setClickListeners() {
@@ -35,19 +55,7 @@ class SignInFragment : Fragment() {
         if (fieldsNotEmpty() && passwordIsEqual()) {
             val userName = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
-
-            activity?.let {
-                firebaseAuth.createUserWithEmailAndPassword(userName, password)
-                    .addOnCompleteListener(it) { task ->
-                        if (task.isSuccessful) {
-                            SignInFragmentDirections.actionSignInFragmentToNavigationHome().apply {
-                                findNavController().navigate(this)
-                            }
-                        } else {
-                            Toast.makeText(context, "Problema ao autenticar, tente novamente", Toast.LENGTH_LONG).show()
-                        }
-                    }
-            }
+            viewModel.registerUser(userName, password)
         }
     }
 

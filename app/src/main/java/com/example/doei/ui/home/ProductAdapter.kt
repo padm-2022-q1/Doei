@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.doei.R
 import com.example.doei.databinding.ProductAdapterBinding
-import com.example.doei.models.Product
+import com.example.doei.domain.models.Product
 
 class ProductAdapter(private val producList: List<Product>, private val activity: Activity, private val listener: Listener): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

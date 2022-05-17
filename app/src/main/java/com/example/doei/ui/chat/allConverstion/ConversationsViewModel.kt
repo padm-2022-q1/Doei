@@ -1,7 +1,7 @@
 package com.example.doei.ui.chat.allConverstion
 
 import androidx.lifecycle.*
-import com.example.doei.models.Conversation
+import com.example.doei.domain.models.Conversation
 import kotlinx.coroutines.flow.MutableStateFlow
 
 class ConversationsViewModel: ViewModel() {

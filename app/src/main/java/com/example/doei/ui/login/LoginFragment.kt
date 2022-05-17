@@ -8,15 +8,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.doei.R
 import com.example.doei.databinding.FragmentLoginBinding
-import com.example.doei.utils.FirebaseUtils.firebaseAuth
-import com.example.doei.utils.FirebaseUtils.firebaseUser
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.EmailAuthProvider
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class LoginFragment : Fragment(), View.OnClickListener {
 
-    private val loginViewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
     private lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(
@@ -26,18 +26,28 @@ class LoginFragment : Fragment(), View.OnClickListener {
     ): View {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         setClickListeners()
+        initObservers()
 
         return root
     }
 
-    override fun onStart() {
-        super.onStart()
-        if (firebaseUser != null) {
-            findNavController().navigate(R.id.navigation_home)
+    private fun initObservers() {
+        viewModel.getCurrentUser().observe(requireActivity()) { firebaseUser ->
+            if (firebaseUser != null) {
+                LoginFragmentDirections.actionNavigationLoginToNavigationHome().run {
+                    findNavController().navigate(actionId)
+                }
+            }
+        }
+
+        viewModel.handleAuthError().observe(requireActivity()) { message ->
+            if (!message.isNullOrBlank()) {
+                Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            }
         }
     }
-
     private fun setClickListeners() {
         binding.btLogin.setOnClickListener(this)
         binding.btSignin.setOnClickListener(this)
@@ -46,22 +56,11 @@ class LoginFragment : Fragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             binding.btLogin.id -> {
-                activity?.let {
-                    firebaseAuth.signInWithEmailAndPassword(
-                        binding.etUsername.text.toString(),
-                        binding.etPassword.text.toString()
-                    ).addOnCompleteListener(it) { task ->
-                        if (task.isSuccessful) {
-                            LoginFragmentDirections.actionNavigationLoginToNavigationHome().run {
-                                findNavController().navigate(actionId)
-                            }
-                        } else {
-                            Toast.makeText(
-                                context, "Falha na autenticação",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                val email = binding.etUsername.text.toString().trim()
+                val password = binding.etPassword.text.toString().trim()
+
+                if (email.isNotBlank() && password.isNotBlank()) {
+                    viewModel.loginClicked(email, password)
                 }
             }
 

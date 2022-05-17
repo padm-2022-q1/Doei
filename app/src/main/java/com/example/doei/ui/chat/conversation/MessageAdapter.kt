@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.doei.databinding.AdapterMessageBinding
-import com.example.doei.models.ChatMessage
+import com.example.doei.domain.models.ChatMessage
 
 class MessageAdapter(
     private val list: List<ChatMessage>,

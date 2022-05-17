@@ -10,9 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.doei.R
 import com.example.doei.databinding.FragmentHomeBinding
-import com.example.doei.models.Product
-import com.example.doei.ui.product_details.ProductDetailsFragment
-import com.example.doei.utils.FirebaseUtils.firebaseUser
+import com.example.doei.domain.models.Product
 
 class HomeFragment : Fragment(), ProductAdapter.Listener {
 
