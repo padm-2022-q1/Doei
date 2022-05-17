@@ -18,7 +18,7 @@ class ProductAdapter(private val producList: List<Product>, private val activity
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = producList[position]
         holder.tbProductName.text = product.name
-        holder.tvDistance.text = product.distance
+        holder.tvDistance.text = product.local
         val itemImage = when(position){
             0 -> R.drawable.geladeiraimg
             1 -> R.drawable.sofa_antigo

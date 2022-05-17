@@ -2,16 +2,14 @@ package com.example.doei.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import com.example.doei.domain.models.Product
-import kotlinx.coroutines.flow.MutableStateFlow
+import com.example.doei.domain.repository.FirebaseDatabaseRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class HomeViewModel : ViewModel() {
-    //TODO apagar mock
-    private val list = listOf<Product>(
-        Product("", "Geladeira","10km", "Geladeira, não possui frostfree, com pequenos amaçados"),
-        Product("", "Sofa Antigo","14km", "Sofa bem confortavel")
-    )
+@HiltViewModel
+class HomeViewModel @Inject constructor(firebaseDatabaseRepository: FirebaseDatabaseRepository) : ViewModel() {
 
-    val productList: LiveData<List<Product>> = MutableStateFlow(list).asLiveData()
+    val productList: LiveData<List<Product>> = firebaseDatabaseRepository.handleProductList()
+    val handleErrorMessage: LiveData<String> = firebaseDatabaseRepository.handleErrorMessage()
 }

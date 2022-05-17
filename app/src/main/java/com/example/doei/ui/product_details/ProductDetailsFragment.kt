@@ -39,9 +39,6 @@ class ProductDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val loginViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
-
         _binding = ProductDetailsFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
