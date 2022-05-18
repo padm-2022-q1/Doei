@@ -1,7 +1,9 @@
 package com.example.doei.ui.product_register
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -11,6 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -94,7 +97,10 @@ class ProductRegisterFragment : Fragment() {
 
         var intColor: Int = ResourcesCompat.getColor(getResources(), R.color.water_green, null); //Pega a cor customizada dos resources
         botaoAnunciar.setTextColor(Color.WHITE)
-        botaoAnunciar.setBackgroundColor(intColor)
+        //botaoAnunciar.setBackgroundColor(botaoAnunciar.context.resources.getColor(R.color.purple_500))
+        botaoAnunciar.background.setColorFilter(ContextCompat.getColor(requireContext(), androidx.appcompat.R.color.material_deep_teal_500), PorterDuff.Mode.MULTIPLY)
+        //botaoAnunciar.setBackgroundColor(intColor)
+
         //muda o estilo do botão para o usuário ver que está enabled
 
 
@@ -106,11 +112,9 @@ class ProductRegisterFragment : Fragment() {
 
 
     fun enableAnnounceButton(){
-        var intColor: Int = ResourcesCompat.getColor(getResources(), R.color.water_green, null); //Pega a cor customizada dos resources
         botaoAnunciar.setTextColor(Color.WHITE)
-        botaoAnunciar.setBackgroundColor(intColor)
+        botaoAnunciar.background.setColorFilter(ContextCompat.getColor(requireContext(), androidx.appcompat.R.color.material_deep_teal_500), PorterDuff.Mode.MULTIPLY)
         //muda o estilo do botão para o usuário ver que está enabled
-
 
         botaoAnunciar.isEnabled = true  //libera o botão para toque
     }
