@@ -17,8 +17,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
 import com.example.doei.ui.home.HomeViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ProductRegisterFragment : Fragment() {
 
 

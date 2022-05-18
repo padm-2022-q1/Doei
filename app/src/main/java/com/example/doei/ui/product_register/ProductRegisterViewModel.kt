@@ -8,7 +8,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-@AndroidEntryPoint
 class ProductRegisterViewModel @Inject constructor(private val firebaseDatabaseRepository: FirebaseDatabaseRepository)  : ViewModel() {
     fun addProductToDatabase(product : Product) : Boolean{
         return firebaseDatabaseRepository.addProductToDatabase(product)
