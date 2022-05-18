@@ -19,7 +19,7 @@ import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
 import com.example.doei.domain.repository.FirebaseDatabaseRepository
 import com.google.android.material.snackbar.Snackbar
-
+import com.google.gson.Gson
 
 
 class ProductRegisterFragment : Fragment() {
@@ -133,9 +133,12 @@ class ProductRegisterFragment : Fragment() {
         produto.name = titulo.text.toString()
         produto.local = "${cidade.text.toString()} - ${estado.text.toString()} "
         produto.description = detalhes.text.toString()
-        produto.imageUrl = fileImage.toString()
+        produto.photo = fileImage.toString()
 
         return produto
+        //val gson = Gson()
+
+        //return gson.toJson(produto)
     }
 
     private fun checarInputs(){

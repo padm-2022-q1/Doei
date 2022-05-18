@@ -27,13 +27,11 @@ class FirebaseDatabaseRepository @Inject constructor() {
         val reference = database.getReference("productList")
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val value = snapshot.value
                 maxId = snapshot.childrenCount
+                val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
                         transformValueIntoProductList(value)
-
-
                 }
             }
 
@@ -54,10 +52,10 @@ class FirebaseDatabaseRepository @Inject constructor() {
                     if (it.key is String && it.value is String) {
                         when (it.key) {
                             Product.NAME -> product.name = it.value as String
-                            Product.USERID -> product.userId = (it.value as String).toLong()
+                            Product.USERID -> product.id = (it.value as String).toLong()
                             Product.LOCAL -> product.local = it.value as String
                             Product.DESCRIPTION -> product.description = it.value as String
-                            Product.IMAGE_URL -> product.imageUrl = it.value as String
+                            Product.IMAGE_URL -> product.photo = it.value as String
                         }
                     }
                 }
@@ -69,15 +67,19 @@ class FirebaseDatabaseRepository @Inject constructor() {
     }
 
     fun addProductToDatabase(jsonProduct : Product) : Boolean{
+        val reference = database.getReference("productList")
+        var maxId : Long = 0
 
+                try {
+                    //database.getReference("productList").push().setValue(jsonProduct)
+                    var id = (maxId + 1).toString()
+                    //database.getReference("productList").child(id).push().setValue(jsonProduct)
+                    database.getReference("productList").child("5").setValue(jsonProduct)
 
-        try {
-            database.getReference("productList").child(maxId.toString()).push().setValue(jsonProduct)
-            return true
-        }
-        catch(e : Exception){
-            return false
-        }
-
+                    return true
+                }
+                catch(e : Exception){
+                    return false
+                }
     }
 }

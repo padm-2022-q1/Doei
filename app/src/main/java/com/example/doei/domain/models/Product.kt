@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Product(
     @SerializedName("photo")
-    var imageUrl: String = "",
+    var photo: String = "",
     @SerializedName("name")
     var name: String = "",
     @SerializedName("local")
@@ -15,7 +15,7 @@ data class Product(
     @SerializedName("description")
     var description: String = "",
     @SerializedName("id")
-    var userId: Long = -1
+    var id: Long = -1
 ): Parcelable {
     companion object {
         const val NAME = "name"
