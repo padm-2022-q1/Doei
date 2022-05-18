@@ -11,6 +11,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.doei.MainActivity
@@ -29,6 +30,7 @@ class AccountFragment : Fragment() {
     lateinit var femaleButton: ImageButton
     lateinit var upload: TextView
     lateinit var main: MainActivity
+    private val viewModel: AccountViewModel by viewModels()
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -49,9 +51,9 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.navigation_settings)
         }
 
-
         maleButton = binding.buttonGenderMale
 
+        onClickSaveInfos()
 //        maleButton.setOnClickListener {
 //            maleButton.setBackgroundColor(Color.GREEN)
 //        }
@@ -81,5 +83,16 @@ class AccountFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun onClickSaveInfos(){
+        binding.buttonAccountSaveInfo.setOnClickListener {
+
+            val name = binding.editTextNameInfo.text.toString().trim()
+            val idade = binding.editTextAgeInfo.text.toString().trim()
+            val email = binding.editTextEmailInfo.text.toString().trim()
+
+            viewModel.saveAccountInfos(name, idade, email)
+        }
     }
 }

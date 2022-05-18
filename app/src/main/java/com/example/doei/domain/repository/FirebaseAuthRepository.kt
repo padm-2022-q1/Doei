@@ -5,6 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.UserInfo
 import javax.inject.Inject
 
 class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth) {
@@ -41,5 +42,21 @@ class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth)
 
     fun signOut() {
         auth.signOut()
+    }
+
+    private fun getUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+        ?: throw Exception("No user is signed in")
+
+    val userId = getUser()
+
+    fun updateAccountInfo(name: String?, idade: String?, email: String?){
+        //TODO: foreach em uma tabela com as infos de conta por usuario para fazer o update no ID correto
+//        if(userId == DataBaseUserId) {
+//            //TODO: faz o update
+//            name = name
+//            idade = idade
+//            email = email
+//        }
+
     }
 }
