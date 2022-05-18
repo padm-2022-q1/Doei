@@ -1,28 +1,22 @@
 package com.example.doei.ui.product_register
 
-import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.example.doei.R
 import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
-import com.example.doei.domain.repository.FirebaseDatabaseRepository
-import com.google.android.material.snackbar.Snackbar
-import com.google.gson.Gson
+import com.example.doei.ui.home.HomeViewModel
 
 
 class ProductRegisterFragment : Fragment() {
@@ -48,8 +42,7 @@ class ProductRegisterFragment : Fragment() {
 
     private lateinit var botaoAnunciar: Button
 
-    private lateinit var viewModel: ProductRegisterViewModel
-
+    private val viewModel: ProductRegisterViewModel by viewModels()
 
     companion object {
         fun newInstance() = ProductRegisterFragment()
@@ -61,9 +54,6 @@ class ProductRegisterFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val productRegisterViewModel =
-            ViewModelProvider(this).get(ProductRegisterViewModel::class.java)
-
         _binding = ProductRegisterFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
@@ -73,7 +63,6 @@ class ProductRegisterFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ProductRegisterViewModel::class.java)
 
         // TODO: Use the ViewModel
         setListeners()
@@ -107,9 +96,8 @@ class ProductRegisterFragment : Fragment() {
 
     fun anunciarProduto(){
         var jsonProduto = pegarInfosProduto()
-        val firebaseDatabaseRepository : FirebaseDatabaseRepository = FirebaseDatabaseRepository()
 
-        var success = firebaseDatabaseRepository.addProductToDatabase(jsonProduto)
+        var success = viewModel.addProductToDatabase(jsonProduto)
         if(success){
             Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_SHORT).show()
         }
