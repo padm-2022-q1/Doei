@@ -111,10 +111,10 @@ class ProductRegisterFragment : Fragment() {
 
         var success = firebaseDatabaseRepository.addProductToDatabase(jsonProduto)
         if(success){
-
+            Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_SHORT).show()
         }
         else{
-
+            Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_SHORT).show()
         }
     }
 
