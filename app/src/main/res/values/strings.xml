@@ -49,5 +49,6 @@
     <string name="senha">Senha</string>
     <string name="register">Cadastrar</string>
     <string name="confirm_password">Confirmar Senha</string>
+    <string name="editText_phone_hint">Telefone (DDD + Número)</string>
 
 </resources>

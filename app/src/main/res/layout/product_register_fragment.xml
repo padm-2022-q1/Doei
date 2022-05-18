@@ -48,6 +48,7 @@
 
                 android:hint="@string/editText_state_hint"
                 android:inputType="text"
+                android:maxLength="2"
                 android:paddingStart="@dimen/padding_editText_product_register"
                 android:paddingEnd="@dimen/padding_editText_product_register"
 
@@ -69,9 +70,30 @@
                 android:inputType="text"
                 android:paddingStart="@dimen/padding_editText_product_register"
                 android:paddingEnd="@dimen/padding_editText_product_register"
+                android:maxLength="50"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/editText_state" />
+
+            <EditText
+                android:id="@+id/editText_phone"
+                android:layout_width="240dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+
+                android:background="@drawable/custom_input"
+                android:backgroundTint="@color/light_gray"
+
+                android:hint="@string/editText_phone_hint"
+
+                android:inputType="text"
+                android:maxLength="11"
+                android:paddingStart="@dimen/padding_editText_product_register"
+                android:paddingEnd="@dimen/padding_editText_product_register"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/editText_city" />
 
 
             <TextView
@@ -87,13 +109,14 @@
 
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_city" />
+                app:layout_constraintTop_toBottomOf="@+id/editText_phone" />
 
             <EditText
                 android:id="@+id/editText_product_title"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:inputType="text"
+                android:maxLength="50"
 
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -112,6 +135,7 @@
                 android:id="@+id/editText_product_category"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:maxLength="50"
                 android:inputType="text"
 
                 android:layout_marginStart="16dp"
@@ -132,6 +156,7 @@
                 android:layout_width="350dp"
                 android:layout_height="160dp"
                 android:inputType="text"
+                android:maxLength="300"
 
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"

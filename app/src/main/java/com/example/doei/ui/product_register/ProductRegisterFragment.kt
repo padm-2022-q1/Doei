@@ -30,9 +30,7 @@ class ProductRegisterFragment : Fragment() {
 
     private lateinit var estado: EditText
     private lateinit var cidade: EditText
-    private lateinit var endereco: EditText
-    private lateinit var numero: EditText
-    private lateinit var complemento: EditText
+    private lateinit var telefone: EditText
 
     private lateinit var titulo: EditText
     private lateinit var categoria: EditText
@@ -72,6 +70,7 @@ class ProductRegisterFragment : Fragment() {
     fun init(){
         estado = binding.editTextState
         cidade = binding.editTextCity
+        telefone = binding.editTextPhone
 
         titulo = binding.editTextProductTitle
         categoria = binding.editTextProductCategory
@@ -100,10 +99,10 @@ class ProductRegisterFragment : Fragment() {
 
         var success = viewModel.addProductToDatabase(jsonProduto)
         if(success){
-            Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
         }
         else{
-            Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -114,6 +113,7 @@ class ProductRegisterFragment : Fragment() {
         produto.category = categoria.text.toString()
         produto.description = detalhes.text.toString()
         produto.photo = fileImage.toString()
+        produto.phone = telefone.text.toString()
 
         return produto
     }

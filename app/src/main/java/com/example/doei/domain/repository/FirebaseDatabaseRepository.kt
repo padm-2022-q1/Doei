@@ -21,17 +21,15 @@ class FirebaseDatabaseRepository @Inject constructor() {
     private val errorMessage = MutableLiveData<String>()
     fun handleErrorMessage():LiveData<String> = errorMessage
 
-    private var maxId : Long = 0
-
-    init {
+    private fun getProductList(): MutableLiveData<List<Product>> {
+        val products = MutableLiveData<List<Product>>()
         val reference = database.getReference("productList")
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                maxId = snapshot.childrenCount
                 val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
-                        transformValueIntoProductList(value)
+                        products.value = transformValueIntoProductList(value)
                 }
             }
 
@@ -41,9 +39,11 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
         }
         reference.addValueEventListener(postListener)
+        return products
     }
 
-    private fun transformValueIntoProductList(value: ArrayList<*>) {
+    private fun transformValueIntoProductList(value: ArrayList<*>): List<Product>? {
+
         val productList = arrayListOf<Product>()
         value.forEach { map ->
             if (map is HashMap<*, *>) {
@@ -63,21 +63,44 @@ class FirebaseDatabaseRepository @Inject constructor() {
             }
 
         }
-        this.productList.value = productList
+        return productList
     }
 
-    fun addProductToDatabase(jsonProduct : Product) : Boolean{
-                try {
-                    //database.getReference("productList").push().setValue(jsonProduct)
-                    var id = (maxId + 1).toString()
-                    jsonProduct.id = id.toLong()
-                    //database.getReference("productList").child(id).push().setValue(jsonProduct)
-                    database.getReference("productList").child(id).setValue(jsonProduct)
+    fun addProductToDatabase(jsonProduct: Product): Boolean {
+            try {
+                var idFirebase = getProductListLastId()
 
+                if(!idFirebase.equals("")){
+                    database.getReference("productList").push().setValue(jsonProduct)
                     return true
                 }
-                catch(e : Exception){
-                    return false
+                else{
+                    database.getReference("productList").push().setValue(jsonProduct)
+                    return true
                 }
+
+            } catch (e: Exception) {
+                return false
+            }
+        }
+
+    private fun getProductListLastId() : String{
+        var retorno = "";
+        val reference = database.getReference("productList")
+
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                 retorno = snapshot.childrenCount.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                errorMessage.value = error.message
+            }
+        }
+
+        reference.addValueEventListener(postListener)
+        return retorno
     }
 }
+
+
