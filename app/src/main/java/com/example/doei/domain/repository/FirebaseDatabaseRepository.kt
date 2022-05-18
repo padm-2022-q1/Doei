@@ -73,6 +73,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
                 try {
                     //database.getReference("productList").push().setValue(jsonProduct)
                     var id = (maxId + 1).toString()
+                    jsonProduct.id = id.toLong()
                     //database.getReference("productList").child(id).push().setValue(jsonProduct)
                     database.getReference("productList").child("5").setValue(jsonProduct)
 
