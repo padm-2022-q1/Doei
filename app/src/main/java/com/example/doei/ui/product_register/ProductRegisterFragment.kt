@@ -1,7 +1,10 @@
 package com.example.doei.ui.product_register
 
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
@@ -13,7 +16,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.doei.R
 import com.example.doei.databinding.ProductRegisterFragmentBinding
-import com.example.doei.ui.login.LoginViewModel
+import com.example.doei.domain.models.Product
+import com.example.doei.domain.repository.FirebaseDatabaseRepository
+import com.google.android.material.snackbar.Snackbar
+
 
 
 class ProductRegisterFragment : Fragment() {
@@ -53,7 +59,7 @@ class ProductRegisterFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val productRegisterViewModel =
-            ViewModelProvider(this).get(LoginViewModel::class.java)
+            ViewModelProvider(this).get(ProductRegisterViewModel::class.java)
 
         _binding = ProductRegisterFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -86,6 +92,14 @@ class ProductRegisterFragment : Fragment() {
 
         botaoAnunciar = binding.buttonAnnounceProduct
 
+        var intColor: Int = ResourcesCompat.getColor(getResources(), R.color.water_green, null); //Pega a cor customizada dos resources
+        botaoAnunciar.setTextColor(Color.WHITE)
+        botaoAnunciar.setBackgroundColor(intColor)
+        //muda o estilo do botão para o usuário ver que está enabled
+
+
+        botaoAnunciar.isEnabled = true  //libera o botão para toque
+
         //binding dos componentes com as variáveis
     }
 
@@ -102,10 +116,29 @@ class ProductRegisterFragment : Fragment() {
     }
 
     fun anunciarProduto(){
-        //TODO: integrar com backend
+        var jsonProduto = pegarInfosProduto()
+        val firebaseDatabaseRepository : FirebaseDatabaseRepository = FirebaseDatabaseRepository()
+
+        var success = firebaseDatabaseRepository.addProductToDatabase(jsonProduto)
+        if(success){
+
+        }
+        else{
+
+        }
     }
 
-    fun checarInputs(){
+    private fun pegarInfosProduto() : Product{
+        var produto : Product = Product()
+        produto.name = titulo.text.toString()
+        produto.local = "${cidade.text.toString()} - ${estado.text.toString()} "
+        produto.description = detalhes.text.toString()
+        produto.imageUrl = fileImage.toString()
+
+        return produto
+    }
+
+    private fun checarInputs(){
         var check: Boolean = true
 
         if(cidade.text.equals("") ||
@@ -126,6 +159,23 @@ class ProductRegisterFragment : Fragment() {
 
     }
 
+    val PICK_IMAGE = 1
+    lateinit var fileImage : Uri //variável para armazenar a URI da imagem escolhida pelo usuário
+    //ao receber o resultado da atividade de escolha de imagem
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == PICK_IMAGE) {
+            try{
+                imgViewer.setImageURI(data?.data)
+                fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
+
+            }
+            catch(e : Exception){
+                throw e
+            }
+
+        }
+    }
+
     fun setListeners(){
 
         botaoAnunciar.setOnClickListener(){
@@ -133,6 +183,10 @@ class ProductRegisterFragment : Fragment() {
         } //listener de click no botão
 
         botaoEscolherFoto.setOnClickListener {
+            var intentImagePicker : Intent = Intent()
+            intentImagePicker.setType("image/*")
+            intentImagePicker.setAction(Intent.ACTION_GET_CONTENT)
+            startActivityForResult(Intent.createChooser(intentImagePicker, "Select Picture"), PICK_IMAGE)
             //TODO: Usar intents para que o usuário adicione uma foto de sua galeria
         }
 

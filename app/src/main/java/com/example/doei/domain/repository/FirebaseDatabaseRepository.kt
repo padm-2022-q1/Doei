@@ -21,14 +21,19 @@ class FirebaseDatabaseRepository @Inject constructor() {
     private val errorMessage = MutableLiveData<String>()
     fun handleErrorMessage():LiveData<String> = errorMessage
 
+    private var maxId : Long = 0
+
     init {
         val reference = database.getReference("productList")
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value
+                maxId = snapshot.childrenCount
                 if (value != null) {
                     if (value is ArrayList<*>)
-                    transformValueIntoProductList(value)
+                        transformValueIntoProductList(value)
+
+
                 }
             }
 
@@ -41,7 +46,6 @@ class FirebaseDatabaseRepository @Inject constructor() {
     }
 
     private fun transformValueIntoProductList(value: ArrayList<*>) {
-
         val productList = arrayListOf<Product>()
         value.forEach { map ->
             if (map is HashMap<*, *>) {
@@ -62,5 +66,18 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
         }
         this.productList.value = productList
+    }
+
+    fun addProductToDatabase(jsonProduct : Product) : Boolean{
+
+
+        try {
+            database.getReference("productList").child(maxId.toString()).push().setValue(jsonProduct)
+            return true
+        }
+        catch(e : Exception){
+            return false
+        }
+
     }
 }
