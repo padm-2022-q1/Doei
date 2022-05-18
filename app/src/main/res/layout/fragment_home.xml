@@ -20,22 +20,11 @@
         android:backgroundTint="@color/gray"
         />
 
-    <Button
-        android:id="@+id/btFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/svSearchProduct"
-        app:layout_constraintEnd_toEndOf="@id/svSearchProduct"
-        android:backgroundTint="@color/light_gray"
-        android:text="filtro"
-        android:textColor="@color/dark_gray"
-        />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProducts"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/btFilter"
+        app:layout_constraintTop_toBottomOf="@id/svSearchProduct"
         android:layout_marginHorizontal="20dp"
         tools:listitem="@layout/product_adapter"
         tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"

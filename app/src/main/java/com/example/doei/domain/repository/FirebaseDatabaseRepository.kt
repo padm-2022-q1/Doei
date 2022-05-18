@@ -15,7 +15,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
     private val database = Firebase.database(Constants.DATABASE)
 
-    private val productList = MutableLiveData<List<Product>>()
+    val productList = MutableLiveData<List<Product>>()
     fun handleProductList(): LiveData<List<Product>> = productList
 
     private val errorMessage = MutableLiveData<String>()
