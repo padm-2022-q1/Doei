@@ -82,9 +82,6 @@ class ProductRegisterFragment : Fragment() {
     fun init(){
         estado = binding.editTextState
         cidade = binding.editTextCity
-        endereco = binding.editTextAddress
-        numero = binding.editTextBuildingNumber
-        complemento = binding.editTextComplement
 
         titulo = binding.editTextProductTitle
         categoria = binding.editTextProductCategory
@@ -94,17 +91,6 @@ class ProductRegisterFragment : Fragment() {
         botaoEscolherFoto = binding.buttonChoosePhoto
 
         botaoAnunciar = binding.buttonAnnounceProduct
-
-        var intColor: Int = ResourcesCompat.getColor(getResources(), R.color.water_green, null); //Pega a cor customizada dos resources
-        botaoAnunciar.setTextColor(Color.WHITE)
-        //botaoAnunciar.setBackgroundColor(botaoAnunciar.context.resources.getColor(R.color.purple_500))
-        botaoAnunciar.background.setColorFilter(ContextCompat.getColor(requireContext(), androidx.appcompat.R.color.material_deep_teal_500), PorterDuff.Mode.MULTIPLY)
-        //botaoAnunciar.setBackgroundColor(intColor)
-
-        //muda o estilo do botão para o usuário ver que está enabled
-
-
-        botaoAnunciar.isEnabled = true  //libera o botão para toque
 
         //binding dos componentes com as variáveis
     }
@@ -136,25 +122,22 @@ class ProductRegisterFragment : Fragment() {
         var produto : Product = Product()
         produto.name = titulo.text.toString()
         produto.local = "${cidade.text.toString()} - ${estado.text.toString()} "
+        produto.category = categoria.text.toString()
         produto.description = detalhes.text.toString()
         produto.photo = fileImage.toString()
 
         return produto
-        //val gson = Gson()
-
-        //return gson.toJson(produto)
     }
 
     private fun checarInputs(){
         var check: Boolean = true
 
-        if(cidade.text.equals("") ||
-            endereco.text.equals("") ||
-            numero.text.equals("") ||
-            complemento.text.equals("") ||
-            titulo.text.equals("") ||
-            categoria.text.equals("") ||
-            detalhes.text.equals("")
+        if(estado.text.length != 2 ||
+            cidade.text.length == 0 ||
+            titulo.text.length == 0 ||
+            categoria.text.length == 0 ||
+            detalhes.text.length == 0 ||
+            fileImage.equals(Uri.EMPTY)
         ){
             check = false
         }
@@ -167,14 +150,14 @@ class ProductRegisterFragment : Fragment() {
     }
 
     val PICK_IMAGE = 1
-    lateinit var fileImage : Uri //variável para armazenar a URI da imagem escolhida pelo usuário
+    var fileImage : Uri = Uri.EMPTY //variável para armazenar a URI da imagem escolhida pelo usuário
     //ao receber o resultado da atividade de escolha de imagem
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PICK_IMAGE) {
             try{
                 imgViewer.setImageURI(data?.data)
                 fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
-
+                checarInputs()
             }
             catch(e : Exception){
                 throw e
@@ -194,122 +177,23 @@ class ProductRegisterFragment : Fragment() {
             intentImagePicker.setType("image/*")
             intentImagePicker.setAction(Intent.ACTION_GET_CONTENT)
             startActivityForResult(Intent.createChooser(intentImagePicker, "Select Picture"), PICK_IMAGE)
-            //TODO: Usar intents para que o usuário adicione uma foto de sua galeria
         }
 
-        //restante: listeners de change nas EditTexts
 
-        estado.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
+        val focusChangeListener =  View.OnFocusChangeListener { view, b ->
+            if (!b){
+                checarInputs()
+            }else{
+                checarInputs()
             }
+        }
 
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length == 2) checarInputs()
-            }
-        })  //TODO: Mudar para um dropdown, enquanto isso, só libera o button caso seja um tamanho igual a dois
-
-        cidade.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
-
-        endereco.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
-
-        numero.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
-
-        titulo.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
-
-        categoria.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
-
-        detalhes.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable) {}
-            override fun beforeTextChanged(
-                s: CharSequence, start: Int,
-                count: Int, after: Int
-            ) {
-            }
-
-            override fun onTextChanged(
-                s: CharSequence, start: Int,
-                before: Int, count: Int
-            ) {
-                if (s.length != 0) checarInputs()
-            }
-        })
+        //restante: listeners de focus change nas EditTexts
+        estado.setOnFocusChangeListener(focusChangeListener)
+        cidade.setOnFocusChangeListener(focusChangeListener)
+        titulo.setOnFocusChangeListener(focusChangeListener)
+        categoria.setOnFocusChangeListener(focusChangeListener)
+        detalhes.setOnFocusChangeListener(focusChangeListener)
     }
 
 }

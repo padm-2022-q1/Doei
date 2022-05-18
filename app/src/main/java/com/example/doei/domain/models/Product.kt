@@ -15,7 +15,9 @@ data class Product(
     @SerializedName("description")
     var description: String = "",
     @SerializedName("id")
-    var id: Long = -1
+    var id: Long = -1,
+    @SerializedName("category")
+    var category: String = ""
 ): Parcelable {
     companion object {
         const val NAME = "name"

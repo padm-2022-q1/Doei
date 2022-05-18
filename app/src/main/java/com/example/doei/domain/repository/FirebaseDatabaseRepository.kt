@@ -67,15 +67,12 @@ class FirebaseDatabaseRepository @Inject constructor() {
     }
 
     fun addProductToDatabase(jsonProduct : Product) : Boolean{
-        val reference = database.getReference("productList")
-        var maxId : Long = 0
-
                 try {
                     //database.getReference("productList").push().setValue(jsonProduct)
                     var id = (maxId + 1).toString()
                     jsonProduct.id = id.toLong()
                     //database.getReference("productList").child(id).push().setValue(jsonProduct)
-                    database.getReference("productList").child("5").setValue(jsonProduct)
+                    database.getReference("productList").child(id).setValue(jsonProduct)
 
                     return true
                 }
