@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
 import com.example.doei.ui.home.HomeViewModel
+import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,9 @@ class ProductRegisterFragment : Fragment() {
     private var _binding: ProductRegisterFragmentBinding? = null
 
     private val binding get() = _binding!!
+
+    private lateinit var estadoTextInputLayout: TextInputLayout
+    private lateinit var telefoneTextInputLayout: TextInputLayout
 
 
     private lateinit var estado: EditText
@@ -67,7 +71,10 @@ class ProductRegisterFragment : Fragment() {
         setListeners()
     }
 
-    fun init(){
+    fun init() {
+        estadoTextInputLayout = binding.textInputLayoutState
+        telefoneTextInputLayout = binding.textInputLayoutPhone
+
         estado = binding.editTextState
         cidade = binding.editTextCity
         telefone = binding.editTextPhone
@@ -85,29 +92,32 @@ class ProductRegisterFragment : Fragment() {
     }
 
 
-
-    fun enableAnnounceButton(){
+    fun enableAnnounceButton() {
         botaoAnunciar.setTextColor(Color.WHITE)
-        botaoAnunciar.background.setColorFilter(ContextCompat.getColor(requireContext(), androidx.appcompat.R.color.material_deep_teal_500), PorterDuff.Mode.MULTIPLY)
+        botaoAnunciar.background.setColorFilter(
+            ContextCompat.getColor(
+                requireContext(),
+                androidx.appcompat.R.color.material_deep_teal_500
+            ), PorterDuff.Mode.MULTIPLY
+        )
         //muda o estilo do botão para o usuário ver que está enabled
 
         botaoAnunciar.isEnabled = true  //libera o botão para toque
     }
 
-    fun anunciarProduto(){
+    fun anunciarProduto() {
         var jsonProduto = pegarInfosProduto()
 
         var success = viewModel.addProductToDatabase(jsonProduto)
-        if(success){
+        if (success) {
             Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
-        }
-        else{
+        } else {
             Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
         }
     }
 
-    private fun pegarInfosProduto() : Product{
-        var produto : Product = Product()
+    private fun pegarInfosProduto(): Product {
+        var produto: Product = Product()
         produto.name = titulo.text.toString()
         produto.local = "${cidade.text.toString()} - ${estado.text.toString()} "
         produto.category = categoria.text.toString()
@@ -118,20 +128,21 @@ class ProductRegisterFragment : Fragment() {
         return produto
     }
 
-    private fun checarInputs(){
+    private fun checarInputs() {
         var check: Boolean = true
 
-        if(estado.text.length != 2 ||
+        if (estado.text.length != 2 ||
             cidade.text.length == 0 ||
+            telefone.text.length < 14 ||
             titulo.text.length == 0 ||
             categoria.text.length == 0 ||
             detalhes.text.length == 0 ||
             fileImage.equals(Uri.EMPTY)
-        ){
+        ) {
             check = false
         }
 
-        if(check){
+        if (check) {
             enableAnnounceButton()
         }
 
@@ -139,50 +150,88 @@ class ProductRegisterFragment : Fragment() {
     }
 
     val PICK_IMAGE = 1
-    var fileImage : Uri = Uri.EMPTY //variável para armazenar a URI da imagem escolhida pelo usuário
+    var fileImage: Uri = Uri.EMPTY //variável para armazenar a URI da imagem escolhida pelo usuário
+
     //ao receber o resultado da atividade de escolha de imagem
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == PICK_IMAGE) {
-            try{
+            try {
                 imgViewer.setImageURI(data?.data)
                 fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
                 checarInputs()
-            }
-            catch(e : Exception){
+            } catch (e: Exception) {
                 throw e
             }
 
         }
     }
 
-    fun setListeners(){
+    fun setListeners() {
 
-        botaoAnunciar.setOnClickListener(){
+        botaoAnunciar.setOnClickListener() {
             anunciarProduto()
         } //listener de click no botão
 
         botaoEscolherFoto.setOnClickListener {
-            var intentImagePicker : Intent = Intent()
+            var intentImagePicker: Intent = Intent()
             intentImagePicker.setType("image/*")
             intentImagePicker.setAction(Intent.ACTION_GET_CONTENT)
-            startActivityForResult(Intent.createChooser(intentImagePicker, "Select Picture"), PICK_IMAGE)
+            startActivityForResult(
+                Intent.createChooser(intentImagePicker, "Select Picture"),
+                PICK_IMAGE
+            )
         }
 
 
-        val focusChangeListener =  View.OnFocusChangeListener { view, b ->
-            if (!b){
+        val focusChangeListener = View.OnFocusChangeListener { view, b ->
+            if (!b) {
                 checarInputs()
-            }else{
+            } else {
                 checarInputs()
             }
         }
 
         //restante: listeners de focus change nas EditTexts
-        estado.setOnFocusChangeListener(focusChangeListener)
+        //estado.setOnFocusChangeListener(focusChangeListener)
         cidade.setOnFocusChangeListener(focusChangeListener)
         titulo.setOnFocusChangeListener(focusChangeListener)
         categoria.setOnFocusChangeListener(focusChangeListener)
         detalhes.setOnFocusChangeListener(focusChangeListener)
-    }
 
+        val focusChangeListenerEstado = View.OnFocusChangeListener { view, b ->
+            if (!b) {
+                if (estado.text.length != 2) {
+                    estadoTextInputLayout.error = "A sigla deve ter duas letras"
+                } else {
+                    estadoTextInputLayout.error = null
+                    checarInputs()
+                }
+            }
+        }
+
+        val focusChangeListenerTelefone = View.OnFocusChangeListener { view, b ->
+            if (!b) {
+                //aplicando a máscara de telefone ao input
+                if (telefone.text.length < 10 ) {
+                    telefoneTextInputLayout.error = "O telefone completo deve ter pelo menos 10 números"
+                } else {
+                    if(telefone.text.length == 10)
+                        telefone.text.insert(6,"-")
+
+                    else if(telefone.text.length == 11)
+                        telefone.text.insert(7,"-")
+
+                    if(!telefone.text.contains("("))
+                        telefone.text = telefone.text.insert(0,"(").insert(3,")").insert(4," ")
+
+                    telefoneTextInputLayout.error = null
+                    checarInputs()
+                }
+            }
+        }
+
+        estado.setOnFocusChangeListener(focusChangeListenerEstado)
+        telefone.setOnFocusChangeListener(focusChangeListenerTelefone)
+
+    }
 }

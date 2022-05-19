@@ -42,7 +42,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
         return products
     }
 
-    private fun transformValueIntoProductList(value: ArrayList<*>): List<Product>? {
+    private fun transformValueIntoProductList(value: ArrayList<*>): List<Product> {
 
         val productList = arrayListOf<Product>()
         value.forEach { map ->
@@ -67,40 +67,48 @@ class FirebaseDatabaseRepository @Inject constructor() {
     }
 
     fun addProductToDatabase(jsonProduct: Product): Boolean {
-            try {
-                var idFirebase = getProductListLastId()
+        var retorno = false
+        try {
+                database.getReference("productList").get().addOnSuccessListener {
+                    var idFirebase = it.childrenCount.toString()
+                    database.getReference("productList").child(idFirebase).setValue(jsonProduct)
+                    retorno = true
+                }
 
-                if(!idFirebase.equals("")){
-                    database.getReference("productList").push().setValue(jsonProduct)
-                    return true
-                }
-                else{
-                    database.getReference("productList").push().setValue(jsonProduct)
-                    return true
-                }
 
             } catch (e: Exception) {
                 return false
             }
+        return retorno
         }
 
-    private fun getProductListLastId() : String{
-        var retorno = "";
-        val reference = database.getReference("productList")
+    //*private fun getProductListLastId() : String{
+     //   var productList = getProductList().observe();
+     //   return (productList.value?.size?.minus(1)).toString()
+    //}
 
+    private fun getLastIdDonation() : String{
+        val reference = database.getReference("productList")
+        var productList : List<Product> = emptyList()
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                 retorno = snapshot.childrenCount.toString()
+                val value = snapshot.value
+                if (value != null) {
+                    if (value is ArrayList<*>)
+                        productList = transformValueIntoProductList(value)
+                }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                errorMessage.value = error.message
+                override fun onCancelled(error: DatabaseError) {
+                    errorMessage.value = error.message
+                }
+
             }
+            reference.addValueEventListener(postListener)
+            return productList.size.toString()
         }
 
-        reference.addValueEventListener(postListener)
-        return retorno
-    }
+
 }
 
 
