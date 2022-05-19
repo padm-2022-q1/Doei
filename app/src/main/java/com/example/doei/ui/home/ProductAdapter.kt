@@ -19,9 +19,9 @@ class ProductAdapter(private val producList: List<Product>, private val activity
         val product = producList[position]
         holder.tbProductName.text = product.name
         holder.tvDistance.text = product.local
-        val itemImage = when(position){
-            0 -> R.drawable.geladeiraimg
-            1 -> R.drawable.sofa_antigo
+        val itemImage = when(product.name){
+            "Geladeira" -> R.drawable.geladeiraimg
+            "Sofá" -> R.drawable.sofa_antigo
             else -> R.drawable.sofa_antigo
         }
         Glide.with(activity)
