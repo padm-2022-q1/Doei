@@ -3,6 +3,7 @@ package com.example.doei.domain.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doei.domain.constants.Constants
+import com.example.doei.domain.models.Account
 import com.example.doei.domain.models.Product
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -19,7 +20,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
     fun handleProductList(): LiveData<List<Product>> = productList
 
     private val errorMessage = MutableLiveData<String>()
-    fun handleErrorMessage():LiveData<String> = errorMessage
+    fun handleErrorMessage(): LiveData<String> = errorMessage
 
     init {
         val reference = database.getReference("productList")
@@ -28,7 +29,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
                 val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
-                    transformValueIntoProductList(value)
+                        transformValueIntoProductList(value)
                 }
             }
 
@@ -62,5 +63,50 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
         }
         this.productList.value = productList
+    }
+
+    fun updateAccountInfo(accountInfos: Account): Boolean {
+
+        var retorno = false
+        try {
+            database.getReference("accountList").get().addOnSuccessListener {
+                var idFirebase = it.childrenCount.toString()
+                database.getReference("accountList").child(idFirebase).setValue(accountInfos)
+                retorno = true
+            }
+
+        } catch (e: Exception) {
+            return false
+        }
+        return retorno
+
+    //TODO: foreach em uma tabela com as infos de conta por usuario para fazer o update no ID correto
+//        if(userId == DataBaseUserId) {
+//            //TODO: faz o update
+//            name = name
+//            idade = idade
+//            email = email
+//        }
+    }
+
+    private fun getLastIdAccount() : String{
+        val reference = database.getReference("accountList")
+        var accountList : List<Account> = emptyList()
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value
+                if (value != null) {
+                    if (value is ArrayList<*>)
+                        accountList = transformValueIntoProductList(value)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                errorMessage.value = error.message
+            }
+
+        }
+        reference.addValueEventListener(postListener)
+        return productList.size.toString()
     }
 }

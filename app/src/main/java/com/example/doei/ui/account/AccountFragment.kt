@@ -19,6 +19,7 @@ import com.example.doei.R
 import com.example.doei.R.*
 import com.example.doei.databinding.FragmentHomeBinding
 import com.example.doei.databinding.FragmentAccountBinding
+import com.example.doei.domain.models.Account
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 class AccountFragment : Fragment() {
@@ -88,11 +89,26 @@ class AccountFragment : Fragment() {
     private fun onClickSaveInfos(){
         binding.buttonAccountSaveInfo.setOnClickListener {
 
-            val name = binding.editTextNameInfo.text.toString().trim()
-            val idade = binding.editTextAgeInfo.text.toString().trim()
-            val email = binding.editTextEmailInfo.text.toString().trim()
+            updateAccountInfo()
+        }
+    }
 
-            viewModel.saveAccountInfos(name, idade, email)
+    fun pegarInfosAccount(): Account{
+        var account: Account = Account()
+        account.name = binding.editTextNameInfo.text.toString()
+        account.age = binding.editTextAgeInfo.text.toString()
+
+        return account
+    }
+
+
+    fun updateAccountInfo(){
+        var jsonAccount = pegarInfosAccount()
+        var success = viewModel.addAccountInfosToDataBase(jsonAccount)
+        if (success) {
+            Toast.makeText(context, "Informações atualizadas", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(context, "Houve um erro na atualização das informações", Toast.LENGTH_LONG).show()
         }
     }
 }

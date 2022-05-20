@@ -49,14 +49,5 @@ class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth)
 
     val userId = getUser()
 
-    fun updateAccountInfo(name: String?, idade: String?, email: String?){
-        //TODO: foreach em uma tabela com as infos de conta por usuario para fazer o update no ID correto
-//        if(userId == DataBaseUserId) {
-//            //TODO: faz o update
-//            name = name
-//            idade = idade
-//            email = email
-//        }
 
-    }
 }
