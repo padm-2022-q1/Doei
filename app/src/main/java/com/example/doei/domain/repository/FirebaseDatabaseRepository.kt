@@ -65,6 +65,31 @@ class FirebaseDatabaseRepository @Inject constructor() {
         this.productList.value = productList
     }
 
+    private fun transformValueIntoAccountList(value: ArrayList<*>): List<Account>{
+
+        val accountList = arrayListOf<Account>()
+        value.forEach { map ->
+            if (map is HashMap<*, *>) {
+                val account = Account()
+                map.forEach {
+                    if (it.key is String && it.value is String) {
+                        when (it.key) {
+                            Product.NAME -> account.name = it.value as String
+                            Product.USERID -> account.userId = (it.value as String).toLong()
+                            Product.LOCAL -> account.local = it.value as String
+                            Product.DESCRIPTION -> account.age = it.value as String
+                            Product.IMAGE_URL -> account.imageUrl = it.value as String
+                        }
+                    }
+                }
+                accountList.add(account)
+            }
+
+        }
+        this.productList.value = accountList
+        return accountList
+    }
+
     fun updateAccountInfo(accountInfos: Account): Boolean {
 
         var retorno = false
@@ -97,7 +122,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
                 val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
-                        accountList = transformValueIntoProductList(value)
+                        accountList = transformValueIntoAccountList(value)
                 }
             }
 
@@ -107,6 +132,6 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
         }
         reference.addValueEventListener(postListener)
-        return productList.size.toString()
+        return accountList.size.toString()
     }
 }
