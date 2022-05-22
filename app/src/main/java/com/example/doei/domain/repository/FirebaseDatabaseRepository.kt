@@ -3,7 +3,6 @@ package com.example.doei.domain.repository
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doei.domain.constants.Constants
-import com.example.doei.domain.models.Account
 import com.example.doei.domain.models.Product
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,20 +15,21 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
     private val database = Firebase.database(Constants.DATABASE)
 
-    val productList = MutableLiveData<List<Product>>()
+    private val productList = MutableLiveData<List<Product>>()
     fun handleProductList(): LiveData<List<Product>> = productList
 
     private val errorMessage = MutableLiveData<String>()
-    fun handleErrorMessage(): LiveData<String> = errorMessage
+    fun handleErrorMessage():LiveData<String> = errorMessage
 
-    init {
+    private fun getProductList(): MutableLiveData<List<Product>> {
+        val products = MutableLiveData<List<Product>>()
         val reference = database.getReference("productList")
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
-                        transformValueIntoProductList(value)
+                        products.value = transformValueIntoProductList(value)
                 }
             }
 
@@ -39,9 +39,10 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
         }
         reference.addValueEventListener(postListener)
+        return products
     }
 
-    private fun transformValueIntoProductList(value: ArrayList<*>) {
+    private fun transformValueIntoProductList(value: ArrayList<*>): List<Product> {
 
         val productList = arrayListOf<Product>()
         value.forEach { map ->
@@ -51,10 +52,10 @@ class FirebaseDatabaseRepository @Inject constructor() {
                     if (it.key is String && it.value is String) {
                         when (it.key) {
                             Product.NAME -> product.name = it.value as String
-                            Product.USERID -> product.userId = (it.value as String).toLong()
+                            Product.USERID -> product.id = (it.value as String).toLong()
                             Product.LOCAL -> product.local = it.value as String
                             Product.DESCRIPTION -> product.description = it.value as String
-                            Product.IMAGE_URL -> product.imageUrl = it.value as String
+                            Product.IMAGE_URL -> product.photo = it.value as String
                         }
                     }
                 }
@@ -62,51 +63,52 @@ class FirebaseDatabaseRepository @Inject constructor() {
             }
 
         }
-        this.productList.value = productList
+        return productList
     }
 
-    fun updateAccountInfo(accountInfos: Account): Boolean {
-
+    fun addProductToDatabase(jsonProduct: Product): Boolean {
         var retorno = false
         try {
-            database.getReference("accountList").get().addOnSuccessListener {
-                var idFirebase = it.childrenCount.toString()
-                database.getReference("accountList").child(idFirebase).setValue(accountInfos)
-                retorno = true
+                database.getReference("productList").get().addOnSuccessListener {
+                    var idFirebase = it.childrenCount.toString()
+                    database.getReference("productList").child(idFirebase).setValue(jsonProduct)
+                    retorno = true
+                }
+
+
+            } catch (e: Exception) {
+                return false
             }
-
-        } catch (e: Exception) {
-            return false
-        }
         return retorno
+        }
 
-    //TODO: foreach em uma tabela com as infos de conta por usuario para fazer o update no ID correto
-//        if(userId == DataBaseUserId) {
-//            //TODO: faz o update
-//            name = name
-//            idade = idade
-//            email = email
-//        }
-    }
+    //*private fun getProductListLastId() : String{
+     //   var productList = getProductList().observe();
+     //   return (productList.value?.size?.minus(1)).toString()
+    //}
 
-    private fun getLastIdAccount() : String{
-        val reference = database.getReference("accountList")
-        var accountList : List<Account> = emptyList()
+    private fun getLastIdDonation() : String{
+        val reference = database.getReference("productList")
+        var productList : List<Product> = emptyList()
         val postListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val value = snapshot.value
                 if (value != null) {
                     if (value is ArrayList<*>)
-                        accountList = transformValueIntoProductList(value)
+                        productList = transformValueIntoProductList(value)
                 }
             }
 
-            override fun onCancelled(error: DatabaseError) {
-                errorMessage.value = error.message
-            }
+                override fun onCancelled(error: DatabaseError) {
+                    errorMessage.value = error.message
+                }
 
+            }
+            reference.addValueEventListener(postListener)
+            return productList.size.toString()
         }
-        reference.addValueEventListener(postListener)
-        return productList.size.toString()
-    }
+
+
 }
+
+

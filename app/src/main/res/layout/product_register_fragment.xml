@@ -35,24 +35,40 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editText_state"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_state"
+                android:layout_width="300dp"
+                android:layout_height="80dp"
 
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="12dp"
 
-                android:background="@drawable/custom_input"
-                android:backgroundTint="@color/light_gray"
-
-                android:hint="@string/editText_state_hint"
-                android:inputType="text"
-                android:paddingStart="@dimen/padding_editText_product_register"
-                android:paddingEnd="@dimen/padding_editText_product_register"
-
+                app:errorEnabled="true"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_generalI_info_area_title"/>
+                app:layout_constraintTop_toBottomOf="@+id/textView_generalI_info_area_title"
+
+                >
+                <EditText
+                    android:id="@+id/editText_state"
+                    android:layout_width="150dp"
+                    android:layout_height="50dp"
+
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+
+                    android:background="@drawable/custom_input"
+                    android:backgroundTint="@color/light_gray"
+
+                    android:hint="@string/editText_state_hint"
+                    android:inputType="textCapCharacters"
+                    android:maxLength="2"
+                    android:paddingStart="@dimen/padding_editText_product_register"
+                    android:paddingEnd="@dimen/padding_editText_product_register"
+
+
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <EditText
                 android:id="@+id/editText_city"
@@ -69,64 +85,45 @@
                 android:inputType="text"
                 android:paddingStart="@dimen/padding_editText_product_register"
                 android:paddingEnd="@dimen/padding_editText_product_register"
+                android:maxLength="50"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/editText_state" />
+                app:layout_constraintTop_toBottomOf="@id/textInputLayout_state" />
 
-            <EditText
-                android:id="@+id/editText_address"
-                android:layout_width="350dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout_phone"
+                android:layout_width="300dp"
+                android:layout_height="100dp"
 
-                android:background="@drawable/custom_input"
-                android:backgroundTint="@color/light_gray"
-
-                android:hint="@string/inputText_hint_address"
-                android:inputType="text"
-
-                android:paddingStart="@dimen/padding_editText_product_register"
-                android:paddingEnd="@dimen/padding_editText_product_register"
+                android:layout_marginTop="10dp"
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_city" />
+                app:layout_constraintTop_toBottomOf="@id/editText_city"
 
-            <EditText
-                android:id="@+id/editText_building_number"
-                android:layout_width="100dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                app:errorEnabled="true">
 
-                android:background="@drawable/custom_input"
-                android:backgroundTint="@color/light_gray"
+                <EditText
+                    android:id="@+id/editText_phone"
+                    android:layout_width="240dp"
+                    android:layout_height="50dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
 
-                android:hint="@string/inputText_hint_building_number"
-                android:inputType="number"
-                android:paddingStart="@dimen/padding_editText_product_register"
-                android:paddingEnd="@dimen/padding_editText_product_register"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_address" />
+                    android:background="@drawable/custom_input"
+                    android:backgroundTint="@color/light_gray"
 
-            <EditText
-                android:id="@+id/editText_complement"
-                android:layout_width="238dp"
-                android:layout_height="50dp"
+                    android:hint="@string/editText_phone_hint"
 
-                android:layout_marginStart="12dp"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:paddingStart="@dimen/padding_editText_product_register"
+                    android:paddingEnd="@dimen/padding_editText_product_register"
 
-                android:layout_marginTop="16dp"
-                android:background="@drawable/custom_input"
-                android:backgroundTint="@color/light_gray"
-                android:hint="@string/inputText_hint_complement"
-                android:inputType="text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textInputLayout_phone" />
 
-                android:paddingStart="@dimen/padding_editText_product_register"
-                android:paddingEnd="@dimen/padding_editText_product_register"
+        </com.google.android.material.textfield.TextInputLayout>
 
-                app:layout_constraintStart_toEndOf="@+id/editText_building_number"
-                app:layout_constraintTop_toBottomOf="@+id/editText_address" />
 
             <TextView
                 android:id="@+id/textView_donation_area_title"
@@ -134,20 +131,21 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
 
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="24dp"
                 android:text="@string/textView_donation_area_title_text"
                 android:textColor="@color/water_green"
                 android:textSize="20sp"
 
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText_building_number" />
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayout_phone" />
 
             <EditText
                 android:id="@+id/editText_product_title"
                 android:layout_width="300dp"
                 android:layout_height="50dp"
                 android:inputType="text"
+                android:maxLength="50"
 
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
@@ -166,6 +164,7 @@
                 android:id="@+id/editText_product_category"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
+                android:maxLength="50"
                 android:inputType="text"
 
                 android:layout_marginStart="16dp"
@@ -186,6 +185,7 @@
                 android:layout_width="350dp"
                 android:layout_height="160dp"
                 android:inputType="text"
+                android:maxLength="300"
 
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
