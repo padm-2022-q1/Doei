@@ -21,7 +21,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
     private val errorMessage = MutableLiveData<String>()
     fun handleErrorMessage():LiveData<String> = errorMessage
 
-    private fun getProductList(): MutableLiveData<List<Product>> {
+    private fun getProductListFromDatabase(): MutableLiveData<List<Product>> {
         val products = MutableLiveData<List<Product>>()
         val reference = database.getReference("productList")
         val postListener = object : ValueEventListener {
