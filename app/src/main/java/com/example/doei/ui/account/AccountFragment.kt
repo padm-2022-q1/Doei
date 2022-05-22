@@ -36,6 +36,10 @@ class AccountFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    companion object {
+        fun newInstance() = AccountFragment()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
