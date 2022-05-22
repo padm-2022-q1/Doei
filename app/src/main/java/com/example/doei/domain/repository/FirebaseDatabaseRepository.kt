@@ -79,7 +79,6 @@ class FirebaseDatabaseRepository @Inject constructor() {
                         when (it.key) {
                             Product.NAME -> account.name = it.value as String
                             Product.USERID -> account.userId = (it.value as String).toLong()
-                            Product.LOCAL -> account.local = it.value as String
                             Product.DESCRIPTION -> account.age = it.value as String
                             Product.IMAGE_URL -> account.imageUrl = it.value as String
                         }

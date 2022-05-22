@@ -20,6 +20,7 @@ import com.example.doei.R.*
 import com.example.doei.databinding.FragmentHomeBinding
 import com.example.doei.databinding.FragmentAccountBinding
 import com.example.doei.domain.models.Account
+import com.example.doei.ui.home.HomeViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 class AccountFragment : Fragment() {
@@ -32,6 +33,7 @@ class AccountFragment : Fragment() {
     lateinit var upload: TextView
     lateinit var main: MainActivity
     private val viewModel: AccountViewModel by viewModels()
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -45,8 +47,6 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val loginViewModel =
-            ViewModelProvider(this).get(AccountViewModel::class.java)
 
         _binding = FragmentAccountBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -101,6 +101,7 @@ class AccountFragment : Fragment() {
         var account: Account = Account()
         account.name = binding.editTextNameInfo.text.toString()
         account.age = binding.editTextAgeInfo.text.toString()
+        account.email = binding.editTextEmailInfo.text.toString()
 
         return account
     }
