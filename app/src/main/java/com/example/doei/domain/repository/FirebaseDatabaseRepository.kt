@@ -19,6 +19,9 @@ class FirebaseDatabaseRepository @Inject constructor() {
     val productList = MutableLiveData<List<Product>>()
     fun handleProductList(): LiveData<List<Product>> = productList
 
+    val accountList = MutableLiveData<List<Account>>()
+    fun handleAccountList(): LiveData<List<Account>> = accountList
+
     private val errorMessage = MutableLiveData<String>()
     fun handleErrorMessage(): LiveData<String> = errorMessage
 
@@ -86,7 +89,7 @@ class FirebaseDatabaseRepository @Inject constructor() {
             }
 
         }
-        this.productList.value = accountList
+        this.accountList.value = accountList
         return accountList
     }
 
