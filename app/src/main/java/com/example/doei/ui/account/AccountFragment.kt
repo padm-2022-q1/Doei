@@ -1,8 +1,11 @@
 package com.example.doei.ui.account
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,11 +30,6 @@ class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
     private lateinit var backMenuButton: ImageButton
-    private lateinit var googleSignInClient: GoogleSignInClient
-    lateinit var maleButton: ImageButton
-    lateinit var femaleButton: ImageButton
-    lateinit var upload: TextView
-    lateinit var main: MainActivity
     private val viewModel: AccountViewModel by viewModels()
 
     // This property is only valid between onCreateView and
@@ -55,30 +53,9 @@ class AccountFragment : Fragment() {
             findNavController().navigate(R.id.navigation_settings)
         }
 
-        maleButton = binding.buttonGenderMale
 
         onClickSaveInfos()
-//        maleButton.setOnClickListener {
-//            maleButton.setBackgroundColor(Color.GREEN)
-//        }
-//        toggle.setButtonDrawable(drawable.ic_male)
-//        toggle.setButtonDrawable(drawable.ic_female)
-//        toggle.setOnCheckedChangeListener { _, isChecked ->
-//            if (isChecked) {
-//
-//                toggle.setButtonDrawable(drawable.ic_male)
-//                toggle.setPadding(3,3,3,3)
-//                toggle.setBackgroundColor(resources.getColor(R.color.water_green))
-//
-//            } else {
-//                toggle.setButtonDrawable(drawable.ic_male_off)
-//                toggle.setBackgroundColor(resources.getColor(R.color.light_gray))
-//            }
-//        }
 
-//        upload = binding.textUploadImage
-//        upload.setOnClickListener { Toast.makeText(main,
-//            R.string.text_on_click, Toast.LENGTH_LONG).show() }
 
         return binding.root
     }
@@ -96,12 +73,29 @@ class AccountFragment : Fragment() {
         }
     }
 
+    val PICK_IMAGE = 1
+    var fileImage: Uri = Uri.EMPTY //variável para armazenar a URI da imagem escolhida pelo usuário
+
+    //ao receber o resultado da atividade de escolha de imagem
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == PICK_IMAGE) {
+            try {
+                binding.imageAccountInfo.setImageURI(data?.data)
+                fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
+
+            } catch (e: Exception) {
+                throw e
+            }
+
+        }
+    }
+
     fun pegarInfosAccount(): Account{
         var account: Account = Account()
         account.name = binding.editTextNameInfo.text.toString()
         account.age = binding.editTextAgeInfo.text.toString()
         account.email = binding.editTextEmailInfo.text.toString()
-
+        account.imageUrl = fileImage.toString()
         return account
     }
 

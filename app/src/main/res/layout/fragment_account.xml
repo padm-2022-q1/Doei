@@ -115,70 +115,36 @@
         app:layout_constraintVertical_bias="0.437" />
 
     <TextView
-        android:id="@+id/text_label_gender_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="45dp"
-        android:textSize="@dimen/textSize_label"
-        android:text="Sexo"
-        app:layout_constraintStart_toStartOf="@+id/text_label_name_info"
-        app:layout_constraintTop_toBottomOf="@+id/text_label_name_info" />
-
-    <ImageButton
-        android:id="@+id/button_gender_male"
-        android:src="@drawable/ic_male_off"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/custom_next_button"
-        android:backgroundTint="@color/light_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/text_label_gender_info"
-        app:layout_constraintStart_toStartOf="@+id/editText_name_info"
-        app:layout_constraintTop_toTopOf="@+id/text_label_gender_info" />
-
-    <ImageButton
-        android:id="@+id/button_gender_female"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="24dp"
-        android:background="@drawable/custom_next_button"
-        android:src="@drawable/ic_female_off"
-        android:backgroundTint="@color/light_gray"
-        app:layout_constraintBottom_toBottomOf="@+id/button_gender_male"
-        app:layout_constraintStart_toEndOf="@+id/button_gender_male"
-        app:layout_constraintTop_toTopOf="@+id/button_gender_male"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/text_age_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textSize="@dimen/textSize_label"
+        android:layout_marginTop="72dp"
         android:text="Idade"
-        app:layout_constraintStart_toStartOf="@+id/text_label_gender_info"
-        app:layout_constraintTop_toBottomOf="@+id/text_label_gender_info" />
+        android:textSize="@dimen/textSize_label"
+        app:layout_constraintStart_toStartOf="@+id/text_label_name_info"
+        app:layout_constraintTop_toBottomOf="@+id/text_label_name_info" />
 
     <EditText
         android:id="@+id/editText_age_info"
         android:layout_width="200dp"
         android:layout_height="35dp"
-        android:paddingStart="10dp"
-        android:paddingEnd="5dp"
         android:background="@drawable/custom_input"
-        android:textSize="@dimen/inputText_size"
         android:hint="@string/hint_editText_idade"
         android:inputType="number"
+        android:paddingStart="10dp"
+        android:paddingEnd="5dp"
+        android:textSize="@dimen/inputText_size"
         app:layout_constraintBottom_toBottomOf="@+id/text_age_info"
-        app:layout_constraintStart_toStartOf="@+id/button_gender_male"
+        app:layout_constraintStart_toStartOf="@+id/editText_name_info"
         app:layout_constraintTop_toTopOf="@+id/text_age_info" />
 
     <TextView
         android:id="@+id/text_email_info"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:textSize="@dimen/textSize_label"
+        android:layout_marginTop="72dp"
         android:text="Email"
+        android:textSize="@dimen/textSize_label"
         app:layout_constraintStart_toStartOf="@+id/text_age_info"
         app:layout_constraintTop_toBottomOf="@+id/text_age_info" />
 
