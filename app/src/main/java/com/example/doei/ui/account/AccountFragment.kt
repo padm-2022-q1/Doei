@@ -25,7 +25,9 @@ import com.example.doei.databinding.FragmentAccountBinding
 import com.example.doei.domain.models.Account
 import com.example.doei.ui.home.HomeViewModel
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AccountFragment : Fragment() {
 
     private lateinit var binding: FragmentAccountBinding
