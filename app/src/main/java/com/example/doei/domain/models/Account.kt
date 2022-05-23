@@ -15,7 +15,7 @@ data class Account(
     @SerializedName("email")
     var email: String = "",
     @SerializedName("id")
-    var userId: Long = -1
+    var id: Long = -1
 ): Parcelable {
     companion object {
         const val NAME = "name"

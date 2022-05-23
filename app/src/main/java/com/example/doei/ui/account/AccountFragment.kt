@@ -79,8 +79,8 @@ class AccountFragment : Fragment() {
     private fun onClickSaveInfos(){
         binding.buttonAccountSaveInfo.setOnClickListener {
 
-            var jsonAccount = pegarInfosAccount()
-            viewModel.addAccountInfosToDataBase(jsonAccount)
+//            var jsonAccount = pegarInfosAccount()
+//            viewModel.addAccountToDataBase(jsonAccount)
         }
     }
 

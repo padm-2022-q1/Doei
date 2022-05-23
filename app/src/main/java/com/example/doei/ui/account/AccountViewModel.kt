@@ -11,15 +11,9 @@ import javax.inject.Inject
 
 class AccountViewModel @Inject constructor(private val firebaseDatabaseRepository: FirebaseDatabaseRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is LOGIN Fragment"
-    }
-    val text: LiveData<String> = _text
+    fun handleAccountAdded(): LiveData<Boolean> = firebaseDatabaseRepository.handleAddAccount()
 
-    fun addAccountInfosToDataBase( account: Account): Boolean{
-
-        return true
-
-
+    fun addAccountToDataBase( account: Account){
+        firebaseDatabaseRepository.addAccountToDatabase(account)
     }
 }
