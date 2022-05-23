@@ -9,9 +9,9 @@ import com.example.doei.R
 import com.example.doei.databinding.ProductAdapterBinding
 import com.example.doei.domain.models.Product
 
-class ProductAdapter(private val producList: List<Product>, private val activity: Activity, private val listener: Listener): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
+class ProductAdapter(private val producList: List<Product>, private val activity: Activity?, private val listener: Listener): RecyclerView.Adapter<ProductAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ProductAdapterBinding.inflate(LayoutInflater.from(activity.applicationContext), parent, false)
+        val binding = ProductAdapterBinding.inflate(LayoutInflater.from(activity?.applicationContext), parent, false)
         return ViewHolder(binding)
     }
 
@@ -19,14 +19,16 @@ class ProductAdapter(private val producList: List<Product>, private val activity
         val product = producList[position]
         holder.tbProductName.text = product.name
         holder.tvDistance.text = product.local
-        val itemImage = when(product.name){
-            "Geladeira" -> R.drawable.geladeiraimg
-            "Sofá" -> R.drawable.sofa_antigo
-            else -> R.drawable.sofa_antigo
+//        val itemImage = when(product.name){
+//            "Geladeira" -> R.drawable.geladeiraimg
+//            "Sofá" -> R.drawable.sofa_antigo
+//            else -> R.drawable.sofa_antigo
+//        }
+        activity?.let {
+            Glide.with(it)
+                .load(product.photo)
+                .into(holder.ivProduct)
         }
-        Glide.with(activity)
-            .load(itemImage)
-            .into(holder.ivProduct)
 
         holder.itemView.setOnClickListener {
             listener.onProductClick(product)

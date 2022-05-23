@@ -1,21 +1,29 @@
 package com.example.doei.domain.repository
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doei.domain.constants.Constants
 import com.example.doei.domain.models.Product
+import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.StorageTask
+import com.google.firebase.storage.UploadTask
+import com.google.firebase.storage.ktx.storage
 import javax.inject.Inject
 
 class FirebaseDatabaseRepository @Inject constructor() {
 
     private val database = Firebase.database(Constants.DATABASE)
 
-    private val productList = MutableLiveData<List<Product>>()
+    private val productAdded = MutableLiveData<Boolean>()
+    fun handleAddProduct(): LiveData<Boolean> = productAdded
+
+    val productList = getProductListFromDatabase()
     fun handleProductList(): LiveData<List<Product>> = productList
 
     private val errorMessage = MutableLiveData<String>()
@@ -56,6 +64,8 @@ class FirebaseDatabaseRepository @Inject constructor() {
                             Product.LOCAL -> product.local = it.value as String
                             Product.DESCRIPTION -> product.description = it.value as String
                             Product.IMAGE_URL -> product.photo = it.value as String
+                            Product.PHONE -> product.phone = it.value as String
+                            Product.CATEGORY -> product.category = it.value as String
                         }
                     }
                 }
@@ -66,21 +76,43 @@ class FirebaseDatabaseRepository @Inject constructor() {
         return productList
     }
 
-    fun addProductToDatabase(jsonProduct: Product): Boolean {
-        var retorno = false
+    fun addProductToDatabase(jsonProduct: Product){
         try {
-                database.getReference("productList").get().addOnSuccessListener {
-                    var idFirebase = it.childrenCount.toString()
-                    database.getReference("productList").child(idFirebase).setValue(jsonProduct)
-                    retorno = true
+            saveImageInStorageAndReturnPhotoUrl(jsonProduct.photo).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    jsonProduct.photo = it.result.toString()
+                    if (jsonProduct.photo.isNotBlank()) {
+                        database.getReference("productList").get().addOnSuccessListener { snapshot ->
+                            val idFirebase = snapshot.childrenCount
+                            database.getReference("productList").child("${idFirebase + 1}")
+                                .setValue(jsonProduct)
+                            productAdded.postValue(true)
+                        }
+                    }
+                } else {
+                    productAdded.postValue(false)
                 }
-
-
-            } catch (e: Exception) {
-                return false
             }
-        return retorno
+        } catch (e: Exception) {
+            productAdded.postValue(false)
         }
+    }
+
+    private fun saveImageInStorageAndReturnPhotoUrl(photo: String): Task<Uri> {
+        val uri = Uri.parse(photo)
+        val storageReference = Firebase.storage.reference
+        val imageRef =
+            storageReference.child("images/${uri.lastPathSegment}")
+        val task = imageRef.putFile(uri).continueWithTask { task ->
+                if (!task.isSuccessful) {
+                    task.exception?.let {
+                        throw it
+                    }
+                }
+                    imageRef.downloadUrl
+            }
+        return task
+    }
 
     //*private fun getProductListLastId() : String{
      //   var productList = getProductList().observe();

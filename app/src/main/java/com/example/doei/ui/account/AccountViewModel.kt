@@ -18,7 +18,7 @@ class AccountViewModel @Inject constructor(private val firebaseDatabaseRepositor
 
     fun addAccountInfosToDataBase( account: Account): Boolean{
 
-        return firebaseDatabaseRepository.updateAccountInfo(account)
+        return true
 
 
     }

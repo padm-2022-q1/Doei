@@ -14,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
 import com.example.doei.ui.home.HomeViewModel
@@ -59,9 +60,23 @@ class ProductRegisterFragment : Fragment() {
     ): View {
         _binding = ProductRegisterFragmentBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        initObservers()
 
         init()
         return root
+    }
+
+    private fun initObservers() {
+        activity?.let {
+            viewModel.handleProductAdded().observe(it) { productAdded ->
+                if (productAdded) {
+                    Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -108,12 +123,7 @@ class ProductRegisterFragment : Fragment() {
     fun anunciarProduto() {
         var jsonProduto = pegarInfosProduto()
 
-        var success = viewModel.addProductToDatabase(jsonProduto)
-        if (success) {
-            Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
-        }
+        viewModel.addProductToDatabase(jsonProduto)
     }
 
     private fun pegarInfosProduto(): Product {
@@ -157,7 +167,7 @@ class ProductRegisterFragment : Fragment() {
         if (requestCode == PICK_IMAGE) {
             try {
                 imgViewer.setImageURI(data?.data)
-                fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
+                fileImage = data?.data ?: Uri.EMPTY
                 checarInputs()
             } catch (e: Exception) {
                 throw e
@@ -173,13 +183,9 @@ class ProductRegisterFragment : Fragment() {
         } //listener de click no botão
 
         botaoEscolherFoto.setOnClickListener {
-            var intentImagePicker: Intent = Intent()
+            var intentImagePicker: Intent = Intent(Intent.ACTION_PICK)
             intentImagePicker.setType("image/*")
-            intentImagePicker.setAction(Intent.ACTION_GET_CONTENT)
-            startActivityForResult(
-                Intent.createChooser(intentImagePicker, "Select Picture"),
-                PICK_IMAGE
-            )
+            startActivityForResult(intentImagePicker, PICK_IMAGE)
         }
 
 

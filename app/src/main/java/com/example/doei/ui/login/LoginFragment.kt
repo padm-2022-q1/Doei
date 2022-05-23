@@ -33,12 +33,21 @@ class LoginFragment : Fragment(), View.OnClickListener {
         return root
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.vGreen.visibility = View.VISIBLE
+        binding.pbLoading.visibility = View.VISIBLE
+    }
+
     private fun initObservers() {
         viewModel.getCurrentUser().observe(requireActivity()) { firebaseUser ->
             if (firebaseUser != null) {
                 LoginFragmentDirections.actionNavigationLoginToNavigationHome().run {
                     findNavController().navigate(actionId)
                 }
+            }else {
+                binding.vGreen.visibility = View.INVISIBLE
+                binding.pbLoading.visibility = View.INVISIBLE
             }
         }
 

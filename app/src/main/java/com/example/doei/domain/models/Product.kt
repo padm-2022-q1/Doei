@@ -27,5 +27,7 @@ data class Product(
         const val LOCAL = "local"
         const val IMAGE_URL = "photo"
         const val DESCRIPTION = "description"
+        const val CATEGORY = "category"
+        const val PHONE = "phone"
     }
 }

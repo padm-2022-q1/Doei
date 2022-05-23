@@ -40,6 +40,6 @@ class ConversationsFragment: Fragment(), ConversationAdapter.Listener {
     }
 
     override fun onChatClicked() {
-        findNavController().navigate(R.id.action_navigation_conversations_to_chatFragment)
+//        findNavController().navigate(R.id.action_navigation_conversations_to_chatFragment)
     }
 }
