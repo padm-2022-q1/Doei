@@ -25,23 +25,24 @@ tools:context=".ui.product_details.ProductDetailsFragment">
     <ScrollView
         android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="0dp"
         android:layout_below="@+id/textview_view_title"
 
         android:layout_marginTop="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_view_title">
+        app:layout_constraintTop_toBottomOf="@+id/textview_view_title"
+        app:layout_constraintBottom_toTopOf="@id/tvPhone">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <ImageView
                 android:id="@+id/imageViewDoacao"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:src="@drawable/geladeiraimg"
+                tools:src="@drawable/geladeiraimg"
                 app:layout_constraintBottom_toTopOf="@+id/textview_categoria_produto"
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -83,63 +84,56 @@ tools:context=".ui.product_details.ProductDetailsFragment">
                 app:layout_constraintTop_toBottomOf="@+id/textview_categoria_produto" />
 
             <TextView
-                android:id="@+id/textView_distancia"
+                android:id="@+id/textView_local"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-
-                android:layout_marginStart="24dp"
-
-                android:text="6 KM"
+                android:layout_marginTop="8dp"
+                tools:text="6 KM"
                 android:textColor="@color/water_green"
-                android:textSize="20dp"
+                android:textSize="16sp"
                 android:textStyle="bold"
-
-                app:layout_constraintBottom_toTopOf="@+id/textView_detalhes_produto"
-                app:layout_constraintStart_toEndOf="@+id/textView_nome_produto"
-                app:layout_constraintTop_toBottomOf="@+id/textview_categoria_produto"
+                app:layout_constraintStart_toStartOf="@+id/textView_nome_produto"
+                app:layout_constraintTop_toBottomOf="@+id/textView_nome_produto"
                 app:layout_constraintVertical_bias="0.222" />
 
             <TextView
                 android:id="@+id/textView_detalhes_produto"
-                android:layout_width="350dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
 
-                android:layout_marginStart="28dp"
-                android:layout_marginTop="28dp"
-
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
+                android:layout_marginEnd="28dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/textview_detail_default_text"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_nome_produto"
+                app:layout_constraintStart_toStartOf="@id/textView_local"
+                app:layout_constraintTop_toBottomOf="@+id/textView_local"
                 app:layout_constraintVertical_bias="0.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/appCompatButton"
-        android:layout_width="150dp"
-        android:layout_height="70dp"
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/tvPhone"
+        app:layout_constraintBottom_toBottomOf="@id/tvPhone"
+        app:layout_constraintRight_toLeftOf="@id/tvPhone"
+        android:text="@string/contact"
+        android:layout_marginEnd="4dp"
+        />
 
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/water_green"
-        android:text="Entrar na fila"
-        android:textColor="@color/white"
-
-
+    <TextView
+        android:id="@+id/tvPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="119999999"
+        android:textColor="@color/water_green"
         android:textStyle="bold"
-
+        android:layout_marginEnd="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView3"
-        app:layout_constraintVertical_bias="0.0"
-        app:layout_marginBaseline="30dp" />
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

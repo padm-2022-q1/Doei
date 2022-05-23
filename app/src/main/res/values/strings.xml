@@ -8,6 +8,7 @@
     <string name="title_chat">Chat</string>
     <string name="label_dark_mode">Dark Mode</string>
     <string name="label_login">Login</string>
+    <string name="contact">Contato:</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -49,5 +50,6 @@
     <string name="senha">Senha</string>
     <string name="register">Cadastrar</string>
     <string name="confirm_password">Confirmar Senha</string>
+    <string name="editText_phone_hint">Telefone (DDD + Número)</string>
 
 </resources>

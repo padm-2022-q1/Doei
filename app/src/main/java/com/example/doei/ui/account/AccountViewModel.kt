@@ -7,17 +7,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.doei.domain.models.Account
 import com.example.doei.domain.repository.FirebaseDatabaseRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
-@HiltViewModel
 class AccountViewModel @Inject constructor(private val firebaseDatabaseRepository: FirebaseDatabaseRepository) : ViewModel() {
 
-    fun handleAccountAdded(): LiveData<Boolean> = firebaseDatabaseRepository.handleAddAccount()
+    private val _text = MutableLiveData<String>().apply {
+        value = "This is LOGIN Fragment"
+    }
+    val text: LiveData<String> = _text
 
-    fun addAccountInfosToDataBase( account: Account){
+    fun addAccountInfosToDataBase( account: Account): Boolean{
 
-        return firebaseDatabaseRepository.addAccountToDatabase(account)
+        return true
 
 
     }

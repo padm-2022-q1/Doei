@@ -9,7 +9,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.doei.R
 import com.example.doei.databinding.FragmentHomeBinding
 import com.example.doei.domain.models.Product
@@ -52,8 +52,8 @@ class HomeFragment : Fragment(), ProductAdapter.Listener {
 
     private fun initObservers() {
         viewModel.handleProductList().observeForever {  productsList ->
-            binding.rvProducts.layoutManager = LinearLayoutManager(requireContext())
-            binding.rvProducts.adapter = ProductAdapter(productsList, requireActivity(), this)
+            binding.rvProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.rvProducts.adapter = ProductAdapter(productsList, activity, this)
         }
 
         viewModel.handleErrorMessage.observeForever { message ->
@@ -62,6 +62,7 @@ class HomeFragment : Fragment(), ProductAdapter.Listener {
     }
 
     override fun onProductClick(product: Product) {
-        findNavController().navigate(R.id.action_navigation_home_to_product_details)
+        val action = HomeFragmentDirections.actionNavigationHomeToProductDetails(product)
+        findNavController().navigate(action)
     }
 }

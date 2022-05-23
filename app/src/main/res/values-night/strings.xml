@@ -1,5 +1,53 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Doei</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_notifications">Notifications</string>
     <string name="title_settings">Settings</string>
+    <string name="title_conversations">Conversas</string>
+    <string name="title_chat">Chat</string>
+    <string name="label_dark_mode">Dark Mode</string>
+    <string name="label_login">Login</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="actionLogin">Login</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="label_light_mode">Modo Claro</string>
+    <string name="hint_nome_completo">Nome completo</string>
+    <string name="hint_editText_idade">Digite sua idade</string>
+    <string name="hint_editText_email">Digite seu e-mail</string>
+    <string name="text_on_click">UPLOAD YOUR IMAGE</string>
+
+    <!-- Strings related to product details -->
+    <string name="textview_details_title">Detalhes do produto</string>
+    <string name="textview_detail_default_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam varius, nibh eget bibendum rutrum, diam velit suscipit sem, quis consectetur</string>
+    <string name="textview_categoria_text_default">Categoria</string>
+    <string name="title_product_details">Product Details</string>
+
+    <!-- Strings related to product register -->
+    <string name="inputText_hint_city">Cidade</string>
+    <string name="inputText_hint_address">Endereço</string>
+    <string name="inputText_hint_building_number">Número</string>
+    <string name="inputText_hint_complement">Complemento</string>
+    <string name="button_announce_product_text">Anunciar</string>
+    <string name="editText_product_details_hint_text">Detalhes</string>
+    <string name="editText_product_category_hint_text">Categoria</string>
+    <string name="editText_product_title_hint_text">Título</string>
+    <string name="textView_donation_area_title_text">Sobre a doação:</string>
+    <string name="button_choose_photo_text">Escolher foto</string>
+    <string name="product_register_title">Adicionar Produto</string>
+    <string name="editText_state_hint">Sigla Estado</string>
+    <string name="textView_product_name_text">Nome Produto</string>
     <string name="create_account">Criar conta</string>
+    <string name="email">Email</string>
+    <string name="senha">Senha</string>
+    <string name="register">Cadastrar</string>
+    <string name="confirm_password">Confirmar Senha</string>
+
 </resources>

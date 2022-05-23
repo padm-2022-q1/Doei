@@ -29,12 +29,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_search"
-        android:name="com.example.doei.ui.search.SearchFragment"
-        android:label="@string/title_search"
-        tools:layout="@layout/fragment_search" />
-
-    <fragment
         android:id="@+id/navigation_myInterests"
         android:name="com.example.doei.ui.myInterests.NotificationsFragment"
         android:label="@string/title_notifications"
@@ -44,16 +38,16 @@
             app:destination="@id/product_details" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_conversations"
-        android:name="com.example.doei.ui.chat.allConverstion.AllConversationsFragment"
-        android:label="@string/title_conversations"
-        tools:layout="@layout/all_conversations_fragment">
-        <action
-            android:id="@+id/action_navigation_conversations_to_chatFragment"
-            app:destination="@id/navigation_chatFragment" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_conversations"-->
+<!--        android:name="com.example.doei.ui.chat.allConverstion.AllConversationsFragment"-->
+<!--        android:label="@string/title_conversations"-->
+<!--        tools:layout="@layout/all_conversations_fragment">-->
+<!--        <action-->
+<!--            android:id="@+id/action_navigation_conversations_to_chatFragment"-->
+<!--            app:destination="@id/navigation_chatFragment" />-->
 
-    </fragment>
+<!--    </fragment>-->
 
     <fragment
         android:id="@+id/navigation_settings"
@@ -75,7 +69,11 @@
         android:id="@+id/product_details"
         android:name="com.example.doei.ui.product_details.ProductDetailsFragment"
         android:label="@string/title_product_details"
-        tools:layout="@layout/product_details_fragment" />
+        tools:layout="@layout/product_details_fragment" >
+        <argument
+            android:name="product"
+            app:argType="com.example.doei.domain.models.Product" />
+    </fragment>
 
     <fragment
         android:id="@+id/product_register"
@@ -83,11 +81,12 @@
         android:label="@string/product_register_title"
         tools:layout="@layout/product_register_fragment" />
 
-    <fragment
-        android:id="@+id/navigation_chatFragment"
-        android:name="com.example.doei.ui.chat.conversation.ChatFragment"
-        android:label="@string/title_chat"
-        tools:layout="@layout/chat_fragment" />
+<!--    <fragment-->
+<!--        android:id="@+id/navigation_chatFragment"-->
+<!--        android:name="com.example.doei.ui.chat.conversation.ChatFragment"-->
+<!--        android:label="@string/title_chat"-->
+<!--        tools:layout="@layout/chat_fragment" />-->
+
     <fragment
         android:id="@+id/signInFragment"
         android:name="com.example.doei.ui.signIn.SignInFragment"
