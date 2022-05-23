@@ -13,9 +13,11 @@ import javax.inject.Inject
 @HiltViewModel
 class AccountViewModel @Inject constructor(private val firebaseDatabaseRepository: FirebaseDatabaseRepository) : ViewModel() {
 
-    fun addAccountInfosToDataBase( account: Account): Boolean{
+    fun handleAccountAdded(): LiveData<Boolean> = firebaseDatabaseRepository.handleAddAccount()
 
-        return firebaseDatabaseRepository.updateAccountInfo(account)
+    fun addAccountInfosToDataBase( account: Account){
+
+        return firebaseDatabaseRepository.addAccountToDatabase(account)
 
 
     }

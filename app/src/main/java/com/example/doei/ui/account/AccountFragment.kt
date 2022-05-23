@@ -63,18 +63,29 @@ class AccountFragment : Fragment() {
     }
 
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
+    private fun initObservers() {
+        activity?.let {
+            viewModel.handleAccountAdded().observe(it) { accountAdded ->
+                if (accountAdded) {
+                    Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
     }
 
     private fun onClickSaveInfos(){
         binding.buttonAccountSaveInfo.setOnClickListener {
 
-            updateAccountInfo()
+            var jsonAccount = pegarInfosAccount()
+            viewModel.addAccountInfosToDataBase(jsonAccount)
         }
     }
 
+
+    //ao receber o resultado da atividade de escolha de imagem
     val PICK_IMAGE = 1
     var fileImage: Uri = Uri.EMPTY //variável para armazenar a URI da imagem escolhida pelo usuário
 
@@ -83,7 +94,7 @@ class AccountFragment : Fragment() {
         if (requestCode == PICK_IMAGE) {
             try {
                 binding.imageAccountInfo.setImageURI(data?.data)
-                fileImage = MediaStore.Images.Media.getContentUri(data?.data.toString())
+                fileImage = data?.data ?: Uri.EMPTY
 
             } catch (e: Exception) {
                 throw e
@@ -97,18 +108,9 @@ class AccountFragment : Fragment() {
         account.name = binding.editTextNameInfo.text.toString()
         account.age = binding.editTextAgeInfo.text.toString()
         account.email = binding.editTextEmailInfo.text.toString()
-        account.imageUrl = fileImage.toString()
+        account.photo = fileImage.toString()
         return account
     }
 
 
-    fun updateAccountInfo(){
-        var jsonAccount = pegarInfosAccount()
-        var success = viewModel.addAccountInfosToDataBase(jsonAccount)
-        if (success) {
-            Toast.makeText(context, "Informações atualizadas", Toast.LENGTH_LONG).show()
-        } else {
-            Toast.makeText(context, "Houve um erro na atualização das informações", Toast.LENGTH_LONG).show()
-        }
-    }
 }

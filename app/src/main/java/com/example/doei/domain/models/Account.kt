@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Account(
     @SerializedName("photo")
-    var imageUrl: String = "",
+    var photo: String = "",
     @SerializedName("name")
     var name: String = "",
     @SerializedName("age")
