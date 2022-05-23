@@ -25,7 +25,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 class AccountFragment : Fragment() {
 
-    private var _binding: FragmentAccountBinding? = null
+    private lateinit var binding: FragmentAccountBinding
     private lateinit var backMenuButton: ImageButton
     private lateinit var googleSignInClient: GoogleSignInClient
     lateinit var maleButton: ImageButton
@@ -36,7 +36,6 @@ class AccountFragment : Fragment() {
 
     // This property is only valid between onCreateView and
     // onDestroyView.
-    private val binding get() = _binding!!
 
     companion object {
         fun newInstance() = AccountFragment()
@@ -48,8 +47,8 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentAccountBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        binding = FragmentAccountBinding.inflate(inflater, container, false)
+
 
         backMenuButton = binding.buttonAccountBackMenu
         backMenuButton.setOnClickListener {
@@ -81,13 +80,13 @@ class AccountFragment : Fragment() {
 //        upload.setOnClickListener { Toast.makeText(main,
 //            R.string.text_on_click, Toast.LENGTH_LONG).show() }
 
-        return root
+        return binding.root
     }
 
 
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null
+
     }
 
     private fun onClickSaveInfos(){
