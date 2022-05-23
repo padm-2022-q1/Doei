@@ -172,6 +172,15 @@ class FirebaseDatabaseRepository @Inject constructor() {
         }
     }
 
+    fun updateAccountToDatabase(jsonAccount: Account){
+        database.getReference("accountList").get().addOnSuccessListener { snapshot ->
+            val idFirebase = snapshot.childrenCount
+            database.getReference("accountList").child("${idFirebase}")
+                .setValue(jsonAccount)
+            accountAdded.postValue(true)
+        }
+    }
+
     private fun saveImageInStorageAndReturnPhotoUrl(photo: String): Task<Uri> {
         val uri = Uri.parse(photo)
         val storageReference = Firebase.storage.reference

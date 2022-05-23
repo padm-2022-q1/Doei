@@ -44,7 +44,7 @@ class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth)
         auth.signOut()
     }
 
-    private fun getUser(): String = FirebaseAuth.getInstance().currentUser?.uid
+    private fun getUser(): String = getCurrentUser.value?.uid
         ?: throw Exception("No user is signed in")
 
     val userId = getUser()
