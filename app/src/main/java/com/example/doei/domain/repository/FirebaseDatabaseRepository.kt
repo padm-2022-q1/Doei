@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.doei.domain.constants.Constants
+import com.example.doei.domain.models.Account
 import com.example.doei.domain.models.Product
 import com.google.android.gms.tasks.Task
 import com.google.firebase.database.DataSnapshot
@@ -23,8 +24,14 @@ class FirebaseDatabaseRepository @Inject constructor() {
     private val productAdded = MutableLiveData<Boolean>()
     fun handleAddProduct(): LiveData<Boolean> = productAdded
 
+    private val accountAdded = MutableLiveData<Boolean>()
+    fun handleAddAccount(): LiveData<Boolean> = accountAdded
+
     val productList = getProductListFromDatabase()
     fun handleProductList(): LiveData<List<Product>> = productList
+
+    val accountList = getAccountListFromDatabase()
+    fun handleAccountList(): LiveData<List<Account>> = accountList
 
     private val errorMessage = MutableLiveData<String>()
     fun handleErrorMessage():LiveData<String> = errorMessage
@@ -48,6 +55,27 @@ class FirebaseDatabaseRepository @Inject constructor() {
         }
         reference.addValueEventListener(postListener)
         return products
+    }
+
+    private fun getAccountListFromDatabase(): MutableLiveData<List<Account>> {
+        val accounts = MutableLiveData<List<Account>>()
+        val reference = database.getReference("accountList")
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value
+                if (value != null) {
+                    if (value is ArrayList<*>)
+                        accounts.value = transformValueIntoAccountList(value)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                errorMessage.value = error.message
+            }
+
+        }
+        reference.addValueEventListener(postListener)
+        return accounts
     }
 
     private fun transformValueIntoProductList(value: ArrayList<*>): List<Product> {
@@ -76,6 +104,30 @@ class FirebaseDatabaseRepository @Inject constructor() {
         return productList
     }
 
+    private fun transformValueIntoAccountList(value: ArrayList<*>): List<Account> {
+
+        val accountList = arrayListOf<Account>()
+        value.forEach { map ->
+            if (map is HashMap<*, *>) {
+                val account = Account()
+                map.forEach {
+                    if (it.key is String && it.value is String) {
+                        when (it.key) {
+                            Product.NAME -> account.name = it.value as String
+                            Product.USERID -> account.id = (it.value as String).toLong()
+
+                            Product.IMAGE_URL -> account.photo = it.value as String
+
+                        }
+                    }
+                }
+                accountList.add(account)
+            }
+
+        }
+        return accountList
+    }
+
     fun addProductToDatabase(jsonProduct: Product){
         try {
             saveImageInStorageAndReturnPhotoUrl(jsonProduct.photo).addOnCompleteListener {
@@ -95,6 +147,33 @@ class FirebaseDatabaseRepository @Inject constructor() {
             }
         } catch (e: Exception) {
             productAdded.postValue(false)
+        }
+    }
+
+    fun addAccountToDatabase(jsonAccount: Account){
+        try {
+            database.getReference("accountList").get().addOnSuccessListener { snapshot ->
+                val idFirebase = snapshot.childrenCount
+                database.getReference("accountList").child("${idFirebase + 1}")
+                    .setValue(jsonAccount)
+                accountAdded.postValue(true)
+            }
+        } catch (e: Exception) {
+            accountAdded.postValue(false)
+        }
+    }
+
+    fun updateAccountToDatabase(jsonAccount: Account){
+        try {
+            database.getReference("accountList").get().addOnSuccessListener { snapshot ->
+                val idFirebase = snapshot.childrenCount
+                database.getReference("accountList").child("${idFirebase}")
+                    .setValue(jsonAccount)
+
+                accountAdded.postValue(true)
+            }
+        } catch (e: Exception) {
+            accountAdded.postValue(false)
         }
     }
 
@@ -138,8 +217,28 @@ class FirebaseDatabaseRepository @Inject constructor() {
             }
             reference.addValueEventListener(postListener)
             return productList.size.toString()
-        }
+    }
 
+    private fun getLastIdAccount() : String{
+        val reference = database.getReference("accountList")
+        var accountList : List<Account> = emptyList()
+        val postListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val value = snapshot.value
+                if (value != null) {
+                    if (value is ArrayList<*>)
+                        accountList = transformValueIntoAccountList(value)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                errorMessage.value = error.message
+            }
+
+        }
+        reference.addValueEventListener(postListener)
+        return accountList.size.toString()
+    }
 
 }
 

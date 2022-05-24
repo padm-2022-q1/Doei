@@ -7,21 +7,21 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Account(
     @SerializedName("photo")
-    var imageUrl: String = "",
+    var photo: String = "",
     @SerializedName("name")
     var name: String = "",
-    @SerializedName("local")
-    var local: String = "",
-    @SerializedName("description")
+    @SerializedName("age")
     var age: String = "",
+    @SerializedName("email")
+    var email: String = "",
     @SerializedName("id")
-    var userId: Long = -1
+    var id: Long = -1
 ): Parcelable {
     companion object {
         const val NAME = "name"
         const val USERID = "id"
-        const val LOCAL = "local"
+        const val AGE = "age"
         const val IMAGE_URL = "photo"
-        const val DESCRIPTION = "description"
+        const val EMAIL = "email"
     }
 }
