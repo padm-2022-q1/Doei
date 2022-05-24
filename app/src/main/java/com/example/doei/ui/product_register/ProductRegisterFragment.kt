@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.doei.R
 import com.example.doei.databinding.ProductRegisterFragmentBinding
 import com.example.doei.domain.models.Product
 import com.example.doei.ui.home.HomeViewModel
@@ -71,7 +72,7 @@ class ProductRegisterFragment : Fragment() {
             viewModel.handleProductAdded().observe(it) { productAdded ->
                 if (productAdded) {
                     Toast.makeText(context, "Produto Cadastrado", Toast.LENGTH_LONG).show()
-                    findNavController().popBackStack()
+                    findNavController().navigate(R.id.navigation_home)
                 } else {
                     Toast.makeText(context, "Houve um erro no cadastro", Toast.LENGTH_LONG).show()
                 }
