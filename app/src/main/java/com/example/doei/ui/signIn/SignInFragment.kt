@@ -38,9 +38,7 @@ class SignInFragment : Fragment() {
             }
 
             viewModel.handleAuthError().observe(it) { message ->
-                if (!message.isNullOrBlank()) {
-                    Toast.makeText(context, message, Toast.LENGTH_LONG).show()
-                }
+                    Toast.makeText(context, "Erro no cadastro", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -56,6 +54,8 @@ class SignInFragment : Fragment() {
             val userName = binding.etUsername.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
             viewModel.registerUser(userName, password)
+        } else {
+            Toast.makeText(activity, "Senhas nao estao iguais", Toast.LENGTH_LONG).show()
         }
     }
 

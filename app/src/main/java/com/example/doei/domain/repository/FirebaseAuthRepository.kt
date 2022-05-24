@@ -11,14 +11,8 @@ import javax.inject.Inject
 class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth) {
 
     val authError: MutableLiveData<String?> = MutableLiveData()
-    val getCurrentUser: MutableLiveData<FirebaseUser?> = MutableLiveData()
+    val getCurrentUser: MutableLiveData<FirebaseUser?> = MutableLiveData(auth.currentUser)
 
-
-    init {
-        if (auth.currentUser != null) {
-            getCurrentUser.postValue(auth.currentUser)
-        }
-    }
 
     fun register(email: String?, pass: String?) {
         auth.createUserWithEmailAndPassword(email!!, pass!!).addOnCompleteListener { task ->
@@ -43,11 +37,6 @@ class FirebaseAuthRepository @Inject constructor(private val auth: FirebaseAuth)
     fun signOut() {
         auth.signOut()
     }
-
-    private fun getUser(): String = FirebaseAuth.getInstance().currentUser?.uid
-        ?: throw Exception("No user is signed in")
-
-    val userId = getUser()
 
 
 }
