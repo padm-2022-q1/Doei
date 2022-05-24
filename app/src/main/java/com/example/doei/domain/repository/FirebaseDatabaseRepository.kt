@@ -152,20 +152,11 @@ class FirebaseDatabaseRepository @Inject constructor() {
 
     fun addAccountToDatabase(jsonAccount: Account){
         try {
-            saveImageInStorageAndReturnPhotoUrl(jsonAccount.photo).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    jsonAccount.photo = it.result.toString()
-                    if (jsonAccount.photo.isNotBlank()) {
-                        database.getReference("accountList").get().addOnSuccessListener { snapshot ->
-                            val idFirebase = snapshot.childrenCount
-                            database.getReference("accountList").child("${idFirebase + 1}")
-                                .setValue(jsonAccount)
-                            accountAdded.postValue(true)
-                        }
-                    }
-                } else {
-                    accountAdded.postValue(false)
-                }
+            database.getReference("accountList").get().addOnSuccessListener { snapshot ->
+                val idFirebase = snapshot.childrenCount
+                database.getReference("accountList").child("${idFirebase + 1}")
+                    .setValue(jsonAccount)
+                accountAdded.postValue(true)
             }
         } catch (e: Exception) {
             accountAdded.postValue(false)
@@ -173,11 +164,16 @@ class FirebaseDatabaseRepository @Inject constructor() {
     }
 
     fun updateAccountToDatabase(jsonAccount: Account){
-        database.getReference("accountList").get().addOnSuccessListener { snapshot ->
-            val idFirebase = snapshot.childrenCount
-            database.getReference("accountList").child("${idFirebase}")
-                .setValue(jsonAccount)
-            accountAdded.postValue(true)
+        try {
+            database.getReference("accountList").get().addOnSuccessListener { snapshot ->
+                val idFirebase = snapshot.childrenCount
+                database.getReference("accountList").child("${idFirebase}")
+                    .setValue(jsonAccount)
+
+                accountAdded.postValue(true)
+            }
+        } catch (e: Exception) {
+            accountAdded.postValue(false)
         }
     }
 

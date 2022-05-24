@@ -105,10 +105,23 @@ class AccountFragment : Fragment() {
 
     fun pegarInfosAccount(): Account{
         var account: Account = Account()
+
         account.name = binding.editTextNameInfo.text.toString()
         account.age = binding.editTextAgeInfo.text.toString()
         account.email = binding.editTextEmailInfo.text.toString()
         account.photo = fileImage.toString()
+        if(binding.editTextNameInfo.text.isNullOrBlank()){
+            account.name = account.name
+        }
+        if(binding.editTextAgeInfo.text.isNullOrBlank()){
+            account.age = account.age
+        }
+        if(binding.editTextEmailInfo.text.isNullOrBlank()){
+            account.email = account.email
+        }
+        if(fileImage == null){
+            account.photo = account.photo
+        }
         return account
     }
 

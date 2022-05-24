@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.doei.databinding.SignInFragmentBinding
+import com.example.doei.domain.models.Account
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,10 +44,36 @@ class SignInFragment : Fragment() {
                 }
             }
         }
+
+//        activity?.let {
+//            viewModel.handleAccountAdded().observe(it) { accountAdded ->
+//                if (accountAdded) {
+//                    Toast.makeText(context, "Conta Cadastrado", Toast.LENGTH_LONG).show()
+//                    findNavController().popBackStack()
+//                } else {
+//                    Toast.makeText(context, "Houve um erro no cadastro da conta", Toast.LENGTH_LONG).show()
+//                }
+//            }
+//        }
+    }
+
+    fun createAccount(){
+        var jsonAccount = pegarInfosAccount()
+        viewModel.addAccountToDataBase(jsonAccount)
+    }
+
+    fun pegarInfosAccount(): Account {
+        var account: Account = Account()
+        account.name = ""
+        account.age = ""
+        account.email = binding.etUsername.text.toString()
+        account.photo = ""
+        return account
     }
 
     private fun setClickListeners() {
         binding.btRegister.setOnClickListener {
+            createAccount()
             verifySignIn()
         }
     }
